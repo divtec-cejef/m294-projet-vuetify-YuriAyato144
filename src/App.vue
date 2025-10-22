@@ -1,23 +1,23 @@
 <template>
   <v-app>
-    <v-btn @click="logData()">Charger les ressources</v-btn>
+    <v-btn @click="logData">Charger les ressources</v-btn>
     <router-view />
   </v-app>
 </template>
 
 <script setup>
-// Initialisation du store et appel de l'API
   import { onMounted } from 'vue'
   import { useAppStore } from '@/stores/app'
 
   const store = useAppStore()
 
+  // Charger les ressources au montage
   onMounted(() => {
-    store.init() // premier chargement
+    store.init()
     console.log('App mounted, store initialized')
   })
-  // onclick du bouton pour logData
+
   function logData () {
-    console.log(store.resources)
+    console.log(store.gods)
   }
 </script>

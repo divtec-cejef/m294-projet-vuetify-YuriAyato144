@@ -1,38 +1,38 @@
-// Utilities
 import { defineStore } from 'pinia'
-// Importer l'API
+// importation de l'API
 import api from '@/plugins/axios'
 
 export const useAppStore = defineStore('app', {
   state: () => ({
-    // Déclaration des propriétés de l'état ici
-    isLoading: false, // Indique si une opération de chargement est en cours
-    error: null, // Stocke les messages d'erreur
-    // Nos ressources nécessaires (que l'on va récupérer via API)
-    resources: [], // Tableau pour stocker les ressources récupérées
+    isLoading: false,
+    error: null,
+    gods: [],
+    heros: [],
+    titans: [],
+    monsters: [],
   }),
-
   getters: {
-    // Déclaration des getters ici
-    hasResources: state => state.resources.length > 0, // Vérifie si des ressources sont disponibles
-    totalResources: state => state.resources.length, // Retourne le nombre total de ressources
+    hasGods: state => state.gods.length > 0,
+    totalGods: state => state.gods.length,
+    hasHeros: state => state.heros.length > 0,
+    totalHeros: state => state.heros.length,
+    hasTitans: state => state.titans.length > 0,
+    totalTitans: state => state.titans.length,
+    hasMonsters: state => state.monsters.length > 0,
+    totalMonsters: state => state.monsters.length,
   },
-
   actions: {
-    // Déclaration des actions ici
-    async fetchRoster () { // Exemple d'action pour récupérer des données depuis une API
+    async fetchGods () {
       try {
         const response = await api.get('/gods')
-        return response.data
+        this.gods = response.data.Gods
       } catch (error) {
-        return error
+        this.error = error
       }
     },
-
     async init () {
-      // Initialisation simple: récupère les données de l'API et les stocke dans this.resources
-      this.resources = await this.fetchRoster()
-      console.log('Ressources initialisées')
+      await this.fetchGods()
+      console.log('Ressources intialisées')
     },
   },
 })
