@@ -38,9 +38,18 @@ export const useAppStore = defineStore('app', {
         this.error = error
       }
     },
+    async fetchTitans () {
+      try {
+        const response = await api.get('/titans')
+        this.titans = response.data.Titans
+      } catch (error) {
+        this.error = error
+      }
+    },
     async init () {
       await this.fetchGods()
       await this.fetchHeroes()
+      await this.fetchTitans()
       console.log('Ressources intialisées')
     },
   },

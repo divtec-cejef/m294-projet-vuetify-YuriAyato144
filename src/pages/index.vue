@@ -12,6 +12,12 @@
       <p>{{ heroe.name }}</p>
     </div>
   </div>
+  <div>
+    <h2>Titans :</h2>
+    <div v-for="titan in store.titans" :key="titan.id" class="titan-card">
+      <p>{{ titan.name }}</p>
+    </div>
+  </div>
 </template>
 
 <script setup>
