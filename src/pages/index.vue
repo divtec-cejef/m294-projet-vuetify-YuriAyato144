@@ -8,14 +8,20 @@
   </div>
   <div>
     <h2>Héros :</h2>
-    <div v-for="heroe in store.heroes" :key="heroe.id" class="hero-card">
-      <p>{{ heroe.name }}</p>
+    <div v-for="hero in store.heroes" :key="hero.id" class="hero-card">
+      <p>{{ hero.name }}</p>
     </div>
   </div>
   <div>
     <h2>Titans :</h2>
     <div v-for="titan in store.titans" :key="titan.id" class="titan-card">
       <p>{{ titan.name }}</p>
+    </div>
+  </div>
+  <div>
+    <h2>Monstres :</h2>
+    <div v-for="monster in store.monsters" :key="monster.id" class="monster-card">
+      <p>{{ monster.name }}</p>
     </div>
   </div>
 </template>

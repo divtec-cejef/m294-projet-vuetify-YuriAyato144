@@ -14,8 +14,8 @@ export const useAppStore = defineStore('app', {
   getters: {
     hasGods: state => state.gods.length > 0,
     totalGods: state => state.gods.length,
-    hasHeroes: state => state.heros.length > 0,
-    totalHeroes: state => state.heros.length,
+    hasHeroes: state => state.heroes.length > 0,
+    totalHeroes: state => state.heroes.length,
     hasTitans: state => state.titans.length > 0,
     totalTitans: state => state.titans.length,
     hasMonsters: state => state.monsters.length > 0,
@@ -46,10 +46,19 @@ export const useAppStore = defineStore('app', {
         this.error = error
       }
     },
+    async fetchMonsters () {
+      try {
+        const response = await api.get('/monsters')
+        this.monsters = response.data.Monsters
+      } catch (error) {
+        this.error = error
+      }
+    },
     async init () {
       await this.fetchGods()
       await this.fetchHeroes()
       await this.fetchTitans()
+      await this.fetchMonsters()
       console.log('Ressources intialisées')
     },
   },
