@@ -7,15 +7,15 @@ export const useAppStore = defineStore('app', {
     isLoading: false,
     error: null,
     gods: [],
-    heros: [],
+    heroes: [],
     titans: [],
     monsters: [],
   }),
   getters: {
     hasGods: state => state.gods.length > 0,
     totalGods: state => state.gods.length,
-    hasHeros: state => state.heros.length > 0,
-    totalHeros: state => state.heros.length,
+    hasHeroes: state => state.heros.length > 0,
+    totalHeroes: state => state.heros.length,
     hasTitans: state => state.titans.length > 0,
     totalTitans: state => state.titans.length,
     hasMonsters: state => state.monsters.length > 0,
@@ -30,8 +30,17 @@ export const useAppStore = defineStore('app', {
         this.error = error
       }
     },
+    async fetchHeroes () {
+      try {
+        const response = await api.get('/heroes')
+        this.heroes = response.data.Heroes
+      } catch (error) {
+        this.error = error
+      }
+    },
     async init () {
       await this.fetchGods()
+      await this.fetchHeroes()
       console.log('Ressources intialisées')
     },
   },

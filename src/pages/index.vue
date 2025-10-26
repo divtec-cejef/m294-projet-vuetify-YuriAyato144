@@ -6,6 +6,12 @@
       <p>{{ god.name }}</p>
     </div>
   </div>
+  <div>
+    <h2>Héros :</h2>
+    <div v-for="heroe in store.heroes" :key="heroe.id" class="hero-card">
+      <p>{{ heroe.name }}</p>
+    </div>
+  </div>
 </template>
 
 <script setup>
