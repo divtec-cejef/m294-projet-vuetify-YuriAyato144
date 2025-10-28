@@ -1,6 +1,5 @@
 <template>
   <v-app>
-    <v-btn @click="logData">Charger les ressources</v-btn>
     <router-view />
   </v-app>
 </template>
