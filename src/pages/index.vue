@@ -3,10 +3,11 @@
     v-model="nom"
     class="mb-4"
     label="Recherche"
-    placeholder="Chercher un nom..."
+    placeholder="Chercher une divinité, héros, titan ou monstre..."
     type="text"
     @input="rechercher"
   />
+
   <v-container>
     <!-- Dieux -->
     <div v-if="filteredGods.length > 0">
@@ -18,7 +19,9 @@
           class="god-card mb-2"
           md="3"
         >
-          <p>{{ god.name }}</p>
+          <v-card>
+            <v-card-title>{{ god.name }}</v-card-title>
+          </v-card>
         </v-col>
       </v-row>
     </div>
@@ -33,7 +36,9 @@
           class="hero-card mb-2"
           md="3"
         >
-          <p>{{ hero.name }}</p>
+          <v-card>
+            <v-card-title>{{ hero.name }}</v-card-title>
+          </v-card>
         </v-col>
       </v-row>
     </div>
@@ -48,7 +53,9 @@
           class="titan-card mb-2"
           md="3"
         >
-          <p>{{ titan.name }}</p>
+          <v-card>
+            <v-card-title>{{ titan.name }}</v-card-title>
+          </v-card>
         </v-col>
       </v-row>
     </div>
@@ -63,7 +70,9 @@
           class="monster-card mb-2"
           md="3"
         >
-          <p>{{ monster.name }}</p>
+          <v-card>
+            <v-card-title>{{ monster.name }}</v-card-title>
+          </v-card>
         </v-col>
       </v-row>
     </div>
@@ -71,13 +80,21 @@
 </template>
 
 <script setup>
-  import { computed, ref } from 'vue'
+  import { computed, onMounted, ref } from 'vue'
   import { useAppStore } from '@/stores/app.js'
 
   const nom = ref('')
   const store = useAppStore()
 
-  // filtres par catégorie
+  // Charger toutes les données depuis les JSON
+  onMounted(async () => {
+    await store.fetchGodsJSON()
+    await store.fetchHeroesJSON()
+    await store.fetchTitansJSON()
+    await store.fetchMonsterJSON()
+  })
+
+  // Filtrage par catégorie
   const filteredGods = computed(() =>
     store.gods.filter(god =>
       god.name.toLowerCase().includes(nom.value.toLowerCase()),
@@ -101,4 +118,7 @@
       monster.name.toLowerCase().includes(nom.value.toLowerCase()),
     ),
   )
+
+  // Fonction rechercher (optionnelle, car les computed sont déjà réactifs)
+  function rechercher () {}
 </script>
