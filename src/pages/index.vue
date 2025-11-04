@@ -91,34 +91,42 @@
     await store.fetchGodsJSON()
     await store.fetchHeroesJSON()
     await store.fetchTitansJSON()
-    await store.fetchMonsterJSON()
+    await store.fetchMonstersJSON()
   })
 
-  // Filtrage par catégorie
+  // Filtrage + limite de 4 par catégorie
   const filteredGods = computed(() =>
-    store.gods.filter(god =>
-      god.name.toLowerCase().includes(nom.value.toLowerCase()),
-    ),
+    store.gods
+      .filter(god =>
+        god.name.toLowerCase().includes(nom.value.toLowerCase()),
+      )
+      .slice(0, 4),
   )
 
   const filteredHeroes = computed(() =>
-    store.heroes.filter(hero =>
-      hero.name.toLowerCase().includes(nom.value.toLowerCase()),
-    ),
+    store.heroes
+      .filter(hero =>
+        hero.name.toLowerCase().includes(nom.value.toLowerCase()),
+      )
+      .slice(0, 4),
   )
 
   const filteredTitans = computed(() =>
-    store.titans.filter(titan =>
-      titan.name.toLowerCase().includes(nom.value.toLowerCase()),
-    ),
+    store.titans
+      .filter(titan =>
+        titan.name.toLowerCase().includes(nom.value.toLowerCase()),
+      )
+      .slice(0, 4),
   )
 
   const filteredMonsters = computed(() =>
-    store.monsters.filter(monster =>
-      monster.name.toLowerCase().includes(nom.value.toLowerCase()),
-    ),
+    store.monsters
+      .filter(monster =>
+        monster.name.toLowerCase().includes(nom.value.toLowerCase()),
+      )
+      .slice(0, 4),
   )
 
-  // Fonction rechercher (optionnelle, car les computed sont déjà réactifs)
+  // Fonction rechercher (optionnelle, les computed sont déjà réactifs)
   function rechercher () {}
 </script>
