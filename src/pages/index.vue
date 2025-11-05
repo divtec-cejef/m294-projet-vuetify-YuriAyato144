@@ -1,13 +1,4 @@
 <template>
-  <v-text-field
-    v-model="nom"
-    class="mb-4"
-    label="Recherche"
-    placeholder="Chercher une divinité, héros, titan ou monstre..."
-    type="text"
-    @input="rechercher"
-  />
-
   <v-container>
 
     <!-- Dieux -->
@@ -26,7 +17,6 @@
           </v-card>
         </v-col>
       </v-row>
-      <!-- Lien vers la page complète -->
       <div class="text-center" />
       <v-btn color="primary" to="/gods">
         Voir tous les dieux
@@ -102,13 +92,13 @@
 </template>
 
 <script setup>
-  import { computed, onMounted, ref } from 'vue'
+
+  import { computed, onMounted } from 'vue'
   import { useAppStore } from '@/stores/app.js'
 
-  const nom = ref('')
   const store = useAppStore()
 
-  // Charger toutes les données depuis les JSON
+  // Chargemenr de toutes les données depuis les JSON
   onMounted(async () => {
     await store.fetchGodsJSON()
     await store.fetchHeroesJSON()
@@ -116,39 +106,8 @@
     await store.fetchMonstersJSON()
   })
 
-  // Filtrage + limite de 4 par catégorie
-  const filteredGods = computed(() =>
-    store.gods
-      .filter(god =>
-        god.name.toLowerCase().includes(nom.value.toLowerCase()),
-      )
-      .slice(0, 4),
-  )
-
-  const filteredHeroes = computed(() =>
-    store.heroes
-      .filter(hero =>
-        hero.name.toLowerCase().includes(nom.value.toLowerCase()),
-      )
-      .slice(0, 4),
-  )
-
-  const filteredTitans = computed(() =>
-    store.titans
-      .filter(titan =>
-        titan.name.toLowerCase().includes(nom.value.toLowerCase()),
-      )
-      .slice(0, 4),
-  )
-
-  const filteredMonsters = computed(() =>
-    store.monsters
-      .filter(monster =>
-        monster.name.toLowerCase().includes(nom.value.toLowerCase()),
-      )
-      .slice(0, 4),
-  )
-
-  // Fonction rechercher (optionnelle, les computed sont déjà réactifs)
-  function rechercher () {}
+  const filteredGods = computed(() => store.gods.slice(0, 4))
+  const filteredHeroes = computed(() => store.heroes.slice(0, 4))
+  const filteredTitans = computed(() => store.titans.slice(0, 4))
+  const filteredMonsters = computed(() => store.monsters.slice(0, 4))
 </script>
