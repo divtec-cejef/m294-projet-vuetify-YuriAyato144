@@ -39,14 +39,13 @@
 <script setup>
   import { computed, onMounted, ref } from 'vue'
   import { useAppStore } from '@/stores/app.js'
-  import {red} from "vuetify/util/colors";
 
   const nom = ref('')
   const store = useAppStore()
 
   // Charger les monstres si ce n'est pas déjà fait
   onMounted(async () => {
-    if (store.monster.length === 0) {
+    if (store.monsters.length === 0) {
       await store.fetchMonstersJSON()
     }
   })
