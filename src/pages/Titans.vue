@@ -3,34 +3,35 @@
     v-model="nom"
     class="mb-4"
     label="Recherche"
-    placeholder="Chercher une divinité..."
+    placeholder="Chercher un titan..."
     type="text"
   />
   <v-container>
+
     <div class="text-center" />
     <v-btn color="primary" to="/">
       <v-icon>mdi-home</v-icon>
     </v-btn>
 
-    <!-- Dieux -->
-    <div v-if="filteredGods.length > 0">
-      <h2 class="mt-4">Dieux :</h2>
+    <!-- Titans -->
+    <div v-if="filteredTitans.length > 0">
+      <h2 class="mt-4">Titans :</h2>
       <v-row class="mb-6">
         <v-col
-          v-for="god in filteredGods"
-          :key="god.id"
-          class="god-card mb-2"
+          v-for="titans in filteredTitans"
+          :key="titans.id"
+          class="titan-card mb-2"
           md="3"
         >
           <v-card>
-            <v-card-title>{{ god.name }}</v-card-title>
+            <v-card-title>{{ titans.name }}</v-card-title>
           </v-card>
         </v-col>
       </v-row>
     </div>
 
     <div v-else class="text-center py-6">
-      Aucun dieu trouvé...
+      Aucun titan trouvé...
     </div>
   </v-container>
 </template>
@@ -42,17 +43,17 @@
   const nom = ref('')
   const store = useAppStore()
 
-  // Charger les dieux si ce n'est pas déjà fait
+  // Charger les titans si ce n'est pas déjà fait
   onMounted(async () => {
-    if (store.gods.length === 0) {
-      await store.fetchGodsJSON()
+    if (store.titans.length === 0) {
+      await store.fetchTitansJSON()
     }
   })
 
   // Filtre réactif
-  const filteredGods = computed(() =>
-    store.gods.filter(god =>
-      god.name.toLowerCase().includes(nom.value.toLowerCase()),
+  const filteredTitans = computed(() =>
+    store.titans.filter(titan =>
+      titan.name.toLowerCase().includes(nom.value.toLowerCase()),
     ),
   )
 </script>

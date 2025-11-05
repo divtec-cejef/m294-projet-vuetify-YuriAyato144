@@ -9,6 +9,7 @@
   />
 
   <v-container>
+
     <!-- Dieux -->
     <div v-if="filteredGods.length > 0">
       <h2 class="mt-4">Dieux :</h2>
@@ -20,10 +21,16 @@
           md="3"
         >
           <v-card>
-            <v-card-title>{{ god.name }}</v-card-title>
+            <v-card-title> {{ god.name }} </v-card-title>
+            <v-card-text> {{ god.description }} </v-card-text>
           </v-card>
         </v-col>
       </v-row>
+      <!-- Lien vers la page complète -->
+      <div class="text-center" />
+      <v-btn color="primary" to="/gods">
+        Voir tous les dieux
+      </v-btn>
     </div>
 
     <!-- Héros -->
@@ -37,10 +44,15 @@
           md="3"
         >
           <v-card>
-            <v-card-title>{{ hero.name }}</v-card-title>
+            <v-card-title> {{ hero.name }} </v-card-title>
+            <v-card-text> {{ hero.description }} </v-card-text>
           </v-card>
         </v-col>
       </v-row>
+      <div class="text-center" />
+      <v-btn color="primary" to="/heroes">
+        Voir tous les héros
+      </v-btn>
     </div>
 
     <!-- Titans -->
@@ -54,10 +66,15 @@
           md="3"
         >
           <v-card>
-            <v-card-title>{{ titan.name }}</v-card-title>
+            <v-card-title> {{ titan.name }} </v-card-title>
+            <v-card-text> {{ titan.description }} </v-card-text>
           </v-card>
         </v-col>
       </v-row>
+      <div class="text-center" />
+      <v-btn color="primary" to="/titans">
+        Voir tous les titans
+      </v-btn>
     </div>
 
     <!-- Monstres -->
@@ -71,10 +88,15 @@
           md="3"
         >
           <v-card>
-            <v-card-title>{{ monster.name }}</v-card-title>
+            <v-card-title> {{ monster.name }} </v-card-title>
+            <v-card-text> {{ monster.description }} </v-card-text>
           </v-card>
         </v-col>
       </v-row>
+      <div class="text-center" />
+      <v-btn color="primary" to="/monsters">
+        Voir tous les monstres
+      </v-btn>
     </div>
   </v-container>
 </template>

@@ -3,34 +3,35 @@
     v-model="nom"
     class="mb-4"
     label="Recherche"
-    placeholder="Chercher une divinité..."
+    placeholder="Chercher un monstre..."
     type="text"
   />
   <v-container>
+
     <div class="text-center" />
     <v-btn color="primary" to="/">
       <v-icon>mdi-home</v-icon>
     </v-btn>
 
-    <!-- Dieux -->
-    <div v-if="filteredGods.length > 0">
-      <h2 class="mt-4">Dieux :</h2>
+    <!-- Monstres -->
+    <div v-if="filteredMonsters.length > 0">
+      <h2 class="mt-4">Monstres :</h2>
       <v-row class="mb-6">
         <v-col
-          v-for="god in filteredGods"
-          :key="god.id"
-          class="god-card mb-2"
+          v-for="monsters in filteredMonsters"
+          :key="monsters.id"
+          class="monster-card mb-2"
           md="3"
         >
           <v-card>
-            <v-card-title>{{ god.name }}</v-card-title>
+            <v-card-title>{{ monsters.name }}</v-card-title>
           </v-card>
         </v-col>
       </v-row>
     </div>
 
     <div v-else class="text-center py-6">
-      Aucun dieu trouvé...
+      Aucun monstre trouvé...
     </div>
   </v-container>
 </template>
@@ -38,21 +39,22 @@
 <script setup>
   import { computed, onMounted, ref } from 'vue'
   import { useAppStore } from '@/stores/app.js'
+  import {red} from "vuetify/util/colors";
 
   const nom = ref('')
   const store = useAppStore()
 
-  // Charger les dieux si ce n'est pas déjà fait
+  // Charger les monstres si ce n'est pas déjà fait
   onMounted(async () => {
-    if (store.gods.length === 0) {
-      await store.fetchGodsJSON()
+    if (store.monster.length === 0) {
+      await store.fetchMonstersJSON()
     }
   })
 
   // Filtre réactif
-  const filteredGods = computed(() =>
-    store.gods.filter(god =>
-      god.name.toLowerCase().includes(nom.value.toLowerCase()),
+  const filteredMonsters = computed(() =>
+    store.monsters.filter(monster =>
+      monster.name.toLowerCase().includes(nom.value.toLowerCase()),
     ),
   )
 </script>

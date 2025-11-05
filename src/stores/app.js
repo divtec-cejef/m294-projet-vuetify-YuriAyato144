@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 // importation de l'API
-import api from '@/plugins/axios'
+// import api from '@/plugins/axios'
 
 export const useAppStore = defineStore('app', {
   state: () => ({
@@ -22,38 +22,41 @@ export const useAppStore = defineStore('app', {
     totalMonsters: state => state.monsters.length,
   },
   actions: {
-    async fetchGods () {
-      try {
-        const response = await api.get('/gods')
-        this.gods = response.data.Gods
-      } catch (error) {
-        this.error = error
-      }
-    },
-    async fetchHeroes () {
-      try {
-        const response = await api.get('/heroes')
-        this.heroes = response.data.Heroes
-      } catch (error) {
-        this.error = error
-      }
-    },
-    async fetchTitans () {
-      try {
-        const response = await api.get('/titans')
-        this.titans = response.data.Titans
-      } catch (error) {
-        this.error = error
-      }
-    },
-    async fetchMonsters () {
-      try {
-        const response = await api.get('/monsters')
-        this.monsters = response.data.Monsters
-      } catch (error) {
-        this.error = error
-      }
-    },
+    // appelle à l'API
+    // async fetchGods () {
+    //   try {
+    //     const response = await api.get('/gods')
+    //     this.gods = response.data.Gods
+    //   } catch (error) {
+    //     this.error = error
+    //   }
+    // },
+    // async fetchHeroes () {
+    //   try {
+    //     const response = await api.get('/heroes')
+    //     this.heroes = response.data.Heroes
+    //   } catch (error) {
+    //     this.error = error
+    //   }
+    // },
+    // async fetchTitans () {
+    //   try {
+    //     const response = await api.get('/titans')
+    //     this.titans = response.data.Titans
+    //   } catch (error) {
+    //     this.error = error
+    //   }
+    // },
+    // async fetchMonsters () {
+    //   try {
+    //     const response = await api.get('/monsters')
+    //     this.monsters = response.data.Monsters
+    //   } catch (error) {
+    //     this.error = error
+    //   }
+    // },
+
+    // appelle aux fichier JSON
     async fetchGodsJSON () {
       this.error = null
       try {
