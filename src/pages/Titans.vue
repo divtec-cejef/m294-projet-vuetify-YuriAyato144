@@ -9,9 +9,14 @@
   <v-container>
 
     <div class="text-center" />
-    <v-btn color="primary" to="/">
-      <v-icon>mdi-home</v-icon>
-    </v-btn>
+    <header>
+      <v-btn class="bouton-menu" color="primary" to="/">
+        <v-icon>mdi-home</v-icon>
+      </v-btn>
+      <v-btn class="bouton-favori" color="primary" to="/Favori">
+        <v-icon>mdi-heart</v-icon>
+      </v-btn>
+    </header>
 
     <!-- Titans -->
     <div v-if="filteredTitans.length > 0">

@@ -1,6 +1,13 @@
 <template>
   <v-container>
-
+    <header>
+      <v-btn class="bouton-menu" color="primary" to="/">
+        <v-icon>mdi-home</v-icon>
+      </v-btn>
+      <v-btn class="bouton-favori" color="primary" to="/Favori">
+        <v-icon>mdi-heart</v-icon>
+      </v-btn>
+    </header>
     <!-- Dieux -->
     <div v-if="filteredGods.length > 0">
       <h2 class="mt-4">Dieux :</h2>
@@ -19,7 +26,7 @@
       </v-row>
       <div class="text-center" />
       <v-btn color="primary" to="/gods">
-        Voir tous les dieux
+        Voir plus...
       </v-btn>
     </div>
 
@@ -41,7 +48,7 @@
       </v-row>
       <div class="text-center" />
       <v-btn color="primary" to="/heroes">
-        Voir tous les héros
+        Voir plus...
       </v-btn>
     </div>
 
@@ -63,7 +70,7 @@
       </v-row>
       <div class="text-center" />
       <v-btn color="primary" to="/titans">
-        Voir tous les titans
+        Voir plus...
       </v-btn>
     </div>
 
@@ -85,7 +92,7 @@
       </v-row>
       <div class="text-center" />
       <v-btn color="primary" to="/monsters">
-        Voir tous les monstres
+        Voir plus...
       </v-btn>
     </div>
   </v-container>
@@ -106,8 +113,15 @@
     await store.fetchMonstersJSON()
   })
 
+  // Limitation des vue possible à 4
   const filteredGods = computed(() => store.gods.slice(0, 4))
   const filteredHeroes = computed(() => store.heroes.slice(0, 4))
   const filteredTitans = computed(() => store.titans.slice(0, 4))
   const filteredMonsters = computed(() => store.monsters.slice(0, 4))
 </script>
+<style>
+header{
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+</style>
