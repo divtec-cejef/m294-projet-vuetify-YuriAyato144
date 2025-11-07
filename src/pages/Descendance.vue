@@ -1,4 +1,5 @@
 <template>
+  <!-- Barre de recherche dynamique -->
   <v-container>
     <header>
       <v-btn class="bouton-menu" color="primary" to="/">
@@ -10,6 +11,13 @@
       <v-btn class="bouton-favori" color="primary" to="/Favori">
         Favori
       </v-btn>
+      <v-text-field
+        v-model="nom"
+        class="recherche"
+        label="Recherche"
+        placeholder="Chercher une divinité..."
+        type="text"
+      />
     </header>
 
     <!-- Dieux -->
@@ -24,8 +32,8 @@
         >
           <v-card>
             <v-card-title> {{ god.name }}</v-card-title>
+            <v-card-text> {{ god.attributes.origin }}</v-card-text>
             <v-img alt="Image de dieux grec" :src="god.image" />
-            <v-card-text> {{ god.description }}</v-card-text>
           </v-card>
         </v-col>
       </v-row>
@@ -47,7 +55,7 @@
         >
           <v-card>
             <v-card-title> {{ hero.name }}</v-card-title>
-            <v-card-text> {{ hero.description }}</v-card-text>
+            <v-card-text> {{ hero.attributes.origin }}</v-card-text>
           </v-card>
         </v-col>
       </v-row>
@@ -69,7 +77,7 @@
         >
           <v-card>
             <v-card-title> {{ titan.name }}</v-card-title>
-            <v-card-text> {{ titan.description }}</v-card-text>
+            <v-card-text> {{ titan.attributes.origin }}</v-card-text>
           </v-card>
         </v-col>
       </v-row>
@@ -91,7 +99,7 @@
         >
           <v-card>
             <v-card-title> {{ monster.name }}</v-card-title>
-            <v-card-text> {{ monster.description }}</v-card-text>
+            <v-card-text> {{ monster.attributes.origin }}</v-card-text>
           </v-card>
         </v-col>
       </v-row>
@@ -144,14 +152,17 @@
   )
 
 </script>
+
 <style>
 header {
-  margin-top: 40px;
   margin-bottom: 40px;
-
-  .bouton-menu, .bouton-descendance {
-    margin-right: 10px;
-  }
 }
+.bouton-menu, .bouton-descendance, .bouton-favori {
+    margin-right: 10px;
+    margin-top: 20px;
+  }
 
+.recherche {
+    margin-top: 40px;
+  }
 </style>

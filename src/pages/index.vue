@@ -129,7 +129,7 @@ header {
   margin-top: 40px;
   margin-bottom: 40px;
 
-  .bouton-menu, .bouton-descendance {
+  .bouton-menu, .bouton-descendance, .bouton-favori {
     margin-right: 10px;
   }
 }

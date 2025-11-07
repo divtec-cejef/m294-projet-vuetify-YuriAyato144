@@ -1,11 +1,5 @@
 <template>
-  <v-text-field
-    v-model="nom"
-    class="mb-4"
-    label="Recherche"
-    placeholder="Chercher une divinité..."
-    type="text"
-  />
+  <!-- Barre de recherche dynamique -->
   <v-container>
     <div class="text-center" />
     <header>
@@ -18,6 +12,13 @@
       <v-btn class="bouton-favori" color="primary" to="/Favori">
         Favori
       </v-btn>
+      <v-text-field
+        v-model="nom"
+        class="recherche"
+        label="Recherche"
+        placeholder="Chercher une divinité..."
+        type="text"
+      />
     </header>
 
     <!-- Dieux -->
@@ -32,7 +33,7 @@
         >
           <v-card>
             <v-card-title>{{ god.name }}</v-card-title>
-<!--            <v-img alt="Image de dieux grec" :src="god.image" />-->
+            <!--            <v-img alt="Image de dieux grec" :src="god.image" />-->
             <v-card-text> {{ god.description }}</v-card-text>
           </v-card>
         </v-col>
