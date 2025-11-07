@@ -13,6 +13,9 @@
       <v-btn class="bouton-menu" color="primary" to="/">
         Menu
       </v-btn>
+      <v-btn class="bouton-descendance" color="primary" to="/Descendance">
+        Descendance
+      </v-btn>
       <v-btn class="bouton-favori" color="primary" to="/Favori">
         Favori
       </v-btn>
@@ -30,6 +33,7 @@
         >
           <v-card>
             <v-card-title>{{ monsters.name }}</v-card-title>
+            <v-card-text> {{ monsters.description }}</v-card-text>
           </v-card>
         </v-col>
       </v-row>
@@ -62,3 +66,15 @@
     ),
   )
 </script>
+
+<style>
+header {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  text-align: center;
+}
+  .bouton-menu {
+    margin-right: 10px;
+  }
+
+</style>

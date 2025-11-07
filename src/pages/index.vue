@@ -4,6 +4,9 @@
       <v-btn class="bouton-menu" color="primary" to="/">
         Menu
       </v-btn>
+      <v-btn class="bouton-descendance" color="primary" to="/Descendance">
+        Descendance
+      </v-btn>
       <v-btn class="bouton-favori" color="primary" to="/Favori">
         Favori
       </v-btn>
@@ -21,12 +24,13 @@
         >
           <v-card>
             <v-card-title> {{ god.name }}</v-card-title>
+            <v-img alt="Image de dieux grec" :src="god.image" />
             <v-card-text> {{ god.description }}</v-card-text>
           </v-card>
         </v-col>
       </v-row>
       <div class="text-center" />
-      <v-btn color="primary" to="/gods">
+      <v-btn class="bouton-divinite" color="primary" to="/gods">
         Voir plus...
       </v-btn>
     </div>
@@ -48,7 +52,7 @@
         </v-col>
       </v-row>
       <div class="text-center" />
-      <v-btn color="primary" to="/heroes">
+      <v-btn class="bouton-divinite" color="primary" to="/heroes">
         Voir plus...
       </v-btn>
     </div>
@@ -70,7 +74,7 @@
         </v-col>
       </v-row>
       <div class="text-center" />
-      <v-btn color="primary" to="/titans">
+      <v-btn class="bouton-divinite" color="primary" to="/titans">
         Voir plus...
       </v-btn>
     </div>
@@ -92,7 +96,7 @@
         </v-col>
       </v-row>
       <div class="text-center" />
-      <v-btn color="primary" to="/monsters">
+      <v-btn class="bouton-divinite" color="primary" to="/monsters">
         Voir plus...
       </v-btn>
     </div>
@@ -125,8 +129,9 @@ header {
   margin-top: 40px;
   margin-bottom: 40px;
 
-  .bouton-menu {
+  .bouton-menu, .bouton-descendance {
     margin-right: 10px;
   }
 }
+
 </style>
