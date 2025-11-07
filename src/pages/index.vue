@@ -2,12 +2,13 @@
   <v-container>
     <header>
       <v-btn class="bouton-menu" color="primary" to="/">
-        <v-icon>mdi-home</v-icon>
+        Menu
       </v-btn>
       <v-btn class="bouton-favori" color="primary" to="/Favori">
-        <v-icon>mdi-heart</v-icon>
+        Favori
       </v-btn>
     </header>
+
     <!-- Dieux -->
     <div v-if="filteredGods.length > 0">
       <h2 class="mt-4">Dieux :</h2>
@@ -19,8 +20,8 @@
           md="3"
         >
           <v-card>
-            <v-card-title> {{ god.name }} </v-card-title>
-            <v-card-text> {{ god.description }} </v-card-text>
+            <v-card-title> {{ god.name }}</v-card-title>
+            <v-card-text> {{ god.description }}</v-card-text>
           </v-card>
         </v-col>
       </v-row>
@@ -41,8 +42,8 @@
           md="3"
         >
           <v-card>
-            <v-card-title> {{ hero.name }} </v-card-title>
-            <v-card-text> {{ hero.description }} </v-card-text>
+            <v-card-title> {{ hero.name }}</v-card-title>
+            <v-card-text> {{ hero.description }}</v-card-text>
           </v-card>
         </v-col>
       </v-row>
@@ -63,8 +64,8 @@
           md="3"
         >
           <v-card>
-            <v-card-title> {{ titan.name }} </v-card-title>
-            <v-card-text> {{ titan.description }} </v-card-text>
+            <v-card-title> {{ titan.name }}</v-card-title>
+            <v-card-text> {{ titan.description }}</v-card-text>
           </v-card>
         </v-col>
       </v-row>
@@ -85,8 +86,8 @@
           md="3"
         >
           <v-card>
-            <v-card-title> {{ monster.name }} </v-card-title>
-            <v-card-text> {{ monster.description }} </v-card-text>
+            <v-card-title> {{ monster.name }}</v-card-title>
+            <v-card-text> {{ monster.description }}</v-card-text>
           </v-card>
         </v-col>
       </v-row>
@@ -120,8 +121,12 @@
   const filteredMonsters = computed(() => store.monsters.slice(0, 4))
 </script>
 <style>
-header{
+header {
   margin-top: 40px;
   margin-bottom: 40px;
+
+  .bouton-menu {
+    margin-right: 10px;
+  }
 }
 </style>

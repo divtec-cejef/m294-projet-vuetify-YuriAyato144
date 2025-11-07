@@ -11,10 +11,10 @@
     <div class="text-center" />
     <header>
       <v-btn class="bouton-menu" color="primary" to="/">
-        <v-icon>mdi-home</v-icon>
+        Menu
       </v-btn>
       <v-btn class="bouton-favori" color="primary" to="/Favori">
-        <v-icon>mdi-heart</v-icon>
+        Favori
       </v-btn>
     </header>
 
@@ -62,6 +62,3 @@
     ),
   )
 </script>
-
-<style scoped lang="sass">
-</style>

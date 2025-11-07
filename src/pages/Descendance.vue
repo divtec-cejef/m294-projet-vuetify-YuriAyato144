@@ -8,6 +8,7 @@
         Favori
       </v-btn>
     </header>
+
   </v-container>
 </template>
 
@@ -15,6 +16,6 @@
 
 </script>
 
-<style>
+<style scoped lang="sass">
 
 </style>
