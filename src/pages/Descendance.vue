@@ -11,6 +11,7 @@
         Favori
       </v-btn>
     </header>
+
     <!-- Dieux -->
     <div v-if="filteredGods.length > 0">
       <h2 class="mt-4">Dieux :</h2>
@@ -102,10 +103,12 @@
   </v-container>
 </template>
 
-<script>
+<script setup>
+
   import { computed, onMounted } from 'vue'
   import { useAppStore } from '@/stores/app.js'
 
+  const nom = ref('')
   const store = useAppStore()
 
   // Chargemenr de toutes les données depuis les JSON
@@ -116,33 +119,31 @@
     await store.fetchMonstersJSON()
   })
 
-  // Filtre réactif pour les dieux
-  let nom
   const filteredGods = computed(() =>
     store.gods.filter(god =>
       god.name.toLowerCase().includes(nom.value.toLowerCase()),
     ),
   )
-  // Filtre réactif pour les héros
+  // Filtre réactif pour les héros-->
   const filteredHeroes = computed(() =>
     store.heroes.filter(heroe =>
       heroe.name.toLowerCase().includes(nom.value.toLowerCase()),
     ),
   )
-  // Filtre réactif pour les titans
+  // Filtre réactif pour les titans-->
   const filteredTitans = computed(() =>
     store.titans.filter(titan =>
       titan.name.toLowerCase().includes(nom.value.toLowerCase()),
     ),
   )
-  // Filtre réactif pour les monstres
+  // Filtre réactif pour les monstres-->
   const filteredMonsters = computed(() =>
     store.monsters.filter(monster =>
       monster.name.toLowerCase().includes(nom.value.toLowerCase()),
     ),
   )
+
 </script>
-<!--CSS pour les boutons-->
 <style>
 header {
   margin-top: 40px;
@@ -152,4 +153,5 @@ header {
     margin-right: 10px;
   }
 }
+
 </style>
