@@ -11,15 +11,16 @@
       <v-btn class="bouton-favori" color="primary" to="/Favori">
         Favori
       </v-btn>
-      <v-text-field
-        v-model="nom"
-        class="recherche"
-        label="Recherche"
-        placeholder="Chercher une divinité..."
-        type="text"
-      />
     </header>
+    <v-text-field
+      v-model="nom"
+      class="recherche"
+      label="Recherche"
+      placeholder="Chercher une divinité..."
+      type="text"
+    />
 
+    <h1 class="text-h3 mb-6">Descendance</h1>
     <!-- Dieux -->
     <div v-if="filteredGods.length > 0">
       <h1 class="mt-4">Dieux :</h1>
@@ -114,25 +115,25 @@
     await store.fetchTitansJSON()
     await store.fetchMonstersJSON()
   })
-
+  // Filtre réactif pour les dieux
   const filteredGods = computed(() =>
     store.gods.filter(god =>
       god.name.toLowerCase().includes(nom.value.toLowerCase()),
     ),
   )
-  // Filtre réactif pour les héros-->
+  // Filtre réactif pour les héros
   const filteredHeroes = computed(() =>
     store.heroes.filter(heroe =>
       heroe.name.toLowerCase().includes(nom.value.toLowerCase()),
     ),
   )
-  // Filtre réactif pour les titans-->
+  // Filtre réactif pour les titans
   const filteredTitans = computed(() =>
     store.titans.filter(titan =>
       titan.name.toLowerCase().includes(nom.value.toLowerCase()),
     ),
   )
-  // Filtre réactif pour les monstres-->
+  // Filtre réactif pour les monstres
   const filteredMonsters = computed(() =>
     store.monsters.filter(monster =>
       monster.name.toLowerCase().includes(nom.value.toLowerCase()),

@@ -12,6 +12,7 @@
       </v-btn>
     </header>
 
+    <h1 class="text-h3 mb-6">Menu</h1>
     <!-- Dieux -->
     <div v-if="filteredGods.length > 0">
       <h2 class="mt-4">Dieux :</h2>

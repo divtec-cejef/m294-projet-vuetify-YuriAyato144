@@ -12,18 +12,18 @@
       <v-btn class="bouton-favori" color="primary" to="/Favori">
         Favori
       </v-btn>
-      <v-text-field
-        v-model="nom"
-        class="recherche"
-        label="Recherche"
-        placeholder="Chercher une divinité..."
-        type="text"
-      />
     </header>
+    <v-text-field
+      v-model="nom"
+      class="recherche"
+      label="Recherche"
+      placeholder="Chercher une divinité..."
+      type="text"
+    />
 
+    <h1 class="text-h3 mb-6">Dieux :</h1>
     <!-- Dieux -->
     <div v-if="filteredGods.length > 0">
-      <h2 class="mt-4">Dieux :</h2>
       <v-row class="mb-6">
         <v-col
           v-for="god in filteredGods"
@@ -33,7 +33,6 @@
         >
           <v-card>
             <v-card-title>{{ god.name }}</v-card-title>
-            <!--            <v-img alt="Image de dieux grec" :src="god.image" />-->
             <v-card-text> {{ god.description }}</v-card-text>
             <v-card-actions class="justify-end">
               <v-btn

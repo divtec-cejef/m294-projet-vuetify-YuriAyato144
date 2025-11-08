@@ -13,7 +13,6 @@
     </header>
 
     <h1 class="text-h3 mb-6">Mes Favoris</h1>
-
     <!-- Message si aucun favori -->
     <div v-if="favoriteItems.length === 0" class="text-center pa-8">
       <v-icon color="grey" size="80">mdi-heart-outline</v-icon>

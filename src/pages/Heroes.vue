@@ -19,10 +19,9 @@
         type="text"
       />
     </header>
-
+    <h1 class="text-h3 mb-6">Héro :</h1>
     <!-- Héros -->
     <div v-if="filteredHeroes.length > 0">
-      <h2 class="mt-4">Héros :</h2>
       <v-row class="mb-6">
         <v-col
           v-for="heroes in filteredHeroes"
@@ -78,7 +77,7 @@ header {
   margin-top: 40px;
   margin-bottom: 40px;
 
-  .bouton-menu {
+  .bouton-menu, .bouton-descendance {
     margin-right: 10px;
   }
 }
