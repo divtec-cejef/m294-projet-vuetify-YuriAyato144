@@ -28,7 +28,7 @@
             <v-card-text>{{ god.description }}</v-card-text>
             <v-card-actions class="justify-end">
               <v-btn
-                :color="store.isFavorite(god.id, 'god') ? 'red' : 'grey'"
+                :color="store.isFavorite(god.id, 'god') ? 'white' : 'grey'"
                 :icon="store.isFavorite(god.id, 'god') ? 'mdi-heart' : 'mdi-heart-outline'"
                 @click="store.toggleFavorite(god.id, 'god')"
               />
@@ -58,7 +58,7 @@
             <v-card-text>{{ hero.description }}</v-card-text>
             <v-card-actions class="justify-end">
               <v-btn
-                :color="store.isFavorite(hero.id, 'hero') ? 'red' : 'grey'"
+                :color="store.isFavorite(hero.id, 'hero') ? 'white' : 'grey'"
                 :icon="store.isFavorite(hero.id, 'hero') ? 'mdi-heart' : 'mdi-heart-outline'"
                 @click="store.toggleFavorite(hero.id, 'hero')"
               />
@@ -88,7 +88,7 @@
             <v-card-text>{{ titan.description }}</v-card-text>
             <v-card-actions class="justify-end">
               <v-btn
-                :color="store.isFavorite(titan.id, 'titan') ? 'red' : 'grey'"
+                :color="store.isFavorite(titan.id, 'titan') ? 'white' : 'grey'"
                 :icon="store.isFavorite(titan.id, 'titan') ? 'mdi-heart' : 'mdi-heart-outline'"
                 @click="store.toggleFavorite(titan.id, 'titan')"
               />
@@ -118,7 +118,7 @@
             <v-card-text>{{ monster.description }}</v-card-text>
             <v-card-actions class="justify-end">
               <v-btn
-                :color="store.isFavorite(monster.id, 'monster') ? 'red' : 'grey'"
+                :color="store.isFavorite(monster.id, 'monster') ? 'white' : 'grey'"
                 :icon="store.isFavorite(monster.id, 'monster') ? 'mdi-heart' : 'mdi-heart-outline'"
                 @click="store.toggleFavorite(monster.id, 'monster')"
               />

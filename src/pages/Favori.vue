@@ -41,7 +41,7 @@
               <v-card-text>{{ god.description }}</v-card-text>
               <v-card-actions class="justify-end">
                 <v-btn
-                  color="red"
+                  color="white"
                   icon="mdi-heart"
                   @click="store.toggleFavorite(god.id, 'god')"
                 />
@@ -66,7 +66,7 @@
               <v-card-text>{{ hero.description }}</v-card-text>
               <v-card-actions class="justify-end">
                 <v-btn
-                  color="red"
+                  color="white"
                   icon="mdi-heart"
                   @click="store.toggleFavorite(hero.id, 'hero')"
                 />
@@ -91,7 +91,7 @@
               <v-card-text>{{ titan.description }}</v-card-text>
               <v-card-actions class="justify-end">
                 <v-btn
-                  color="red"
+                  color="white"
                   icon="mdi-heart"
                   @click="store.toggleFavorite(titan.id, 'titan')"
                 />
@@ -116,7 +116,7 @@
               <v-card-text>{{ monster.description }}</v-card-text>
               <v-card-actions class="justify-end">
                 <v-btn
-                  color="red"
+                  color="white"
                   icon="mdi-heart"
                   @click="store.toggleFavorite(monster.id, 'monster')"
                 />

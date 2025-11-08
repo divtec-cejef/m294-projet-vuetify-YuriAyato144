@@ -35,9 +35,9 @@
             <v-card-text> {{ titans.description }}</v-card-text>
             <v-card-actions class="justify-end">
               <v-btn
-                :color="store.isFavorite(titan.id, 'titan') ? 'red' : 'grey'"
-                :icon="store.isFavorite(titan.id, 'titan') ? 'mdi-heart' : 'mdi-heart-outline'"
-                @click="store.toggleFavorite(titan.id, 'titan')"
+                :color="store.isFavorite(titans.id, 'titan') ? 'white' : 'grey'"
+                :icon="store.isFavorite(titans.id, 'titan') ? 'mdi-heart' : 'mdi-heart-outline'"
+                @click="store.toggleFavorite(titans.id, 'titan')"
               />
             </v-card-actions>
           </v-card>

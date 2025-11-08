@@ -35,7 +35,7 @@
             <v-card-text> {{ monsters.description }}</v-card-text>
             <v-card-actions class="justify-end">
               <v-btn
-                :color="store.isFavorite(monsters.id, 'monster') ? 'red' : 'grey'"
+                :color="store.isFavorite(monsters.id, 'monster') ? 'white' : 'grey'"
                 :icon="store.isFavorite(monsters.id, 'monster') ? 'mdi-heart' : 'mdi-heart-outline'"
                 @click="store.toggleFavorite(monsters.id, 'monster')"
               />

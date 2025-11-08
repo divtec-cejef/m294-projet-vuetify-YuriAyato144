@@ -35,9 +35,9 @@
             <v-card-text> {{ heroes.description }}</v-card-text>
             <v-card-actions class="justify-end">
               <v-btn
-                :color="store.isFavorite(hero.id, 'hero') ? 'red' : 'grey'"
-                :icon="store.isFavorite(hero.id, 'hero') ? 'mdi-heart' : 'mdi-heart-outline'"
-                @click="store.toggleFavorite(hero.id, 'hero')"
+                :color="store.isFavorite(heroes.id, 'hero') ? 'white' : 'grey'"
+                :icon="store.isFavorite(heroes.id, 'hero') ? 'mdi-heart' : 'mdi-heart-outline'"
+                @click="store.toggleFavorite(heroes.id, 'hero')"
               />
             </v-card-actions>
           </v-card>

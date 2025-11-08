@@ -37,7 +37,7 @@
             <v-card-text> {{ god.description }}</v-card-text>
             <v-card-actions class="justify-end">
               <v-btn
-                :color="store.isFavorite(god.id, 'god') ? 'red' : 'grey'"
+                :color="store.isFavorite(god.id, 'god') ? 'white' : 'grey'"
                 :icon="store.isFavorite(god.id, 'god') ? 'mdi-heart' : 'mdi-heart-outline'"
                 @click="store.toggleFavorite(god.id, 'god')"
               />
