@@ -35,6 +35,13 @@
             <v-card-title>{{ god.name }}</v-card-title>
             <!--            <v-img alt="Image de dieux grec" :src="god.image" />-->
             <v-card-text> {{ god.description }}</v-card-text>
+            <v-card-actions class="justify-end">
+              <v-btn
+                :color="store.isFavorite(god.id, 'god') ? 'red' : 'grey'"
+                :icon="store.isFavorite(god.id, 'god') ? 'mdi-heart' : 'mdi-heart-outline'"
+                @click="store.toggleFavorite(god.id, 'god')"
+              />
+            </v-card-actions>
           </v-card>
         </v-col>
       </v-row>

@@ -33,6 +33,13 @@
           <v-card>
             <v-card-title>{{ heroes.name }}</v-card-title>
             <v-card-text> {{ heroes.description }}</v-card-text>
+            <v-card-actions class="justify-end">
+              <v-btn
+                :color="store.isFavorite(hero.id, 'hero') ? 'red' : 'grey'"
+                :icon="store.isFavorite(hero.id, 'hero') ? 'mdi-heart' : 'mdi-heart-outline'"
+                @click="store.toggleFavorite(hero.id, 'hero')"
+              />
+            </v-card-actions>
           </v-card>
         </v-col>
       </v-row>

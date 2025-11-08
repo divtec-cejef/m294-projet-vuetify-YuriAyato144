@@ -5,7 +5,7 @@
       <v-btn class="bouton-menu" color="primary" to="/">
         Menu
       </v-btn>
-      <v-btn class="bouton-descendance" color="primary" to="/Descendance">
+      <v-btn class="bouton-descendance" color="black" to="/Descendance">
         Descendance
       </v-btn>
       <v-btn class="bouton-favori" color="primary" to="/Favori">
@@ -22,7 +22,7 @@
 
     <!-- Dieux -->
     <div v-if="filteredGods.length > 0">
-      <h2 class="mt-4">Dieux :</h2>
+      <h1 class="mt-4">Dieux :</h1>
       <v-row class="mb-6">
         <v-col
           v-for="god in filteredGods"
@@ -38,14 +38,11 @@
         </v-col>
       </v-row>
       <div class="text-center" />
-      <v-btn class="bouton-divinite" color="primary" to="/gods">
-        Voir plus...
-      </v-btn>
     </div>
 
     <!-- Héros -->
     <div v-if="filteredHeroes.length > 0">
-      <h2 class="mt-4">Héros :</h2>
+      <h1 class="mt-4">Héros :</h1>
       <v-row class="mb-6">
         <v-col
           v-for="hero in filteredHeroes"
@@ -60,14 +57,11 @@
         </v-col>
       </v-row>
       <div class="text-center" />
-      <v-btn class="bouton-divinite" color="primary" to="/heroes">
-        Voir plus...
-      </v-btn>
     </div>
 
     <!-- Titans -->
     <div v-if="filteredTitans.length > 0">
-      <h2 class="mt-4">Titans :</h2>
+      <h1 class="mt-4">Titans :</h1>
       <v-row class="mb-6">
         <v-col
           v-for="titan in filteredTitans"
@@ -82,14 +76,11 @@
         </v-col>
       </v-row>
       <div class="text-center" />
-      <v-btn class="bouton-divinite" color="primary" to="/titans">
-        Voir plus...
-      </v-btn>
     </div>
 
     <!-- Monstres -->
     <div v-if="filteredMonsters.length > 0">
-      <h2 class="mt-4">Monstres :</h2>
+      <h1 class="mt-4">Monstres :</h1>
       <v-row class="mb-6">
         <v-col
           v-for="monster in filteredMonsters"
@@ -104,9 +95,6 @@
         </v-col>
       </v-row>
       <div class="text-center" />
-      <v-btn class="bouton-divinite" color="primary" to="/monsters">
-        Voir plus...
-      </v-btn>
     </div>
   </v-container>
 </template>
@@ -161,8 +149,10 @@ header {
     margin-right: 10px;
     margin-top: 20px;
   }
-
 .recherche {
     margin-top: 40px;
   }
+h1{
+  margin-bottom: 20px;
+}
 </style>
