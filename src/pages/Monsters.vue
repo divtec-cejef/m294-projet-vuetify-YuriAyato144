@@ -77,7 +77,6 @@
 header {
   margin-top: 40px;
   margin-bottom: 40px;
-  text-align: center;
 }
   .bouton-menu {
     margin-right: 10px;

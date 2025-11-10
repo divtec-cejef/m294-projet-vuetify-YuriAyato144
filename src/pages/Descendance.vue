@@ -34,6 +34,13 @@
           <v-card>
             <v-card-title> {{ god.name }}</v-card-title>
             <v-card-text> {{ god.attributes.origin }}</v-card-text>
+            <v-card-actions class="justify-end">
+              <v-btn
+                :color="store.isFavorite(god.id, 'titan') ? 'white' : 'grey'"
+                :icon="store.isFavorite(god.id, 'titan') ? 'mdi-heart' : 'mdi-heart-outline'"
+                @click="store.toggleFavorite(god.id, 'titan')"
+              />
+            </v-card-actions>
             <v-img alt="Image de dieux grec" :src="god.image" />
           </v-card>
         </v-col>
@@ -54,6 +61,13 @@
           <v-card>
             <v-card-title> {{ hero.name }}</v-card-title>
             <v-card-text> {{ hero.attributes.origin }}</v-card-text>
+            <v-card-actions class="justify-end">
+              <v-btn
+                :color="store.isFavorite(hero.id, 'titan') ? 'white' : 'grey'"
+                :icon="store.isFavorite(hero.id, 'titan') ? 'mdi-heart' : 'mdi-heart-outline'"
+                @click="store.toggleFavorite(hero.id, 'titan')"
+              />
+            </v-card-actions>
           </v-card>
         </v-col>
       </v-row>
@@ -73,6 +87,13 @@
           <v-card>
             <v-card-title> {{ titan.name }}</v-card-title>
             <v-card-text> {{ titan.attributes.origin }}</v-card-text>
+            <v-card-actions class="justify-end">
+              <v-btn
+                :color="store.isFavorite(titan.id, 'titan') ? 'white' : 'grey'"
+                :icon="store.isFavorite(titan.id, 'titan') ? 'mdi-heart' : 'mdi-heart-outline'"
+                @click="store.toggleFavorite(titan.id, 'titan')"
+              />
+            </v-card-actions>
           </v-card>
         </v-col>
       </v-row>
@@ -92,6 +113,13 @@
           <v-card>
             <v-card-title> {{ monster.name }}</v-card-title>
             <v-card-text> {{ monster.attributes.origin }}</v-card-text>
+            <v-card-actions class="justify-end">
+              <v-btn
+                :color="store.isFavorite(monster.id, 'titan') ? 'white' : 'grey'"
+                :icon="store.isFavorite(monster.id, 'titan') ? 'mdi-heart' : 'mdi-heart-outline'"
+                @click="store.toggleFavorite(monster.id, 'titan')"
+              />
+            </v-card-actions>
           </v-card>
         </v-col>
       </v-row>

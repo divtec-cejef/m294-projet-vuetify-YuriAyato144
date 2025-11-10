@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+// import api from '@/plugins/axios.js' // appelle le fichier AXIOS pour communiquer avec l'API
 
 export const useAppStore = defineStore('app', {
   state: () => ({
@@ -51,7 +52,45 @@ export const useAppStore = defineStore('app', {
       return state.favorites.some(fav => fav.id === id && fav.type === type)
     },
   },
+
   actions: {
+    // appelle des données depuis l'API
+    // async fetchGods () {
+    //   try {
+    //     const response = await api.get('/gods')
+    //     this.gods = response.data.gods
+    //   } catch (error) {
+    //     this.error = error
+    //   }
+    // },
+    //
+    // async fetchHeroes () {
+    //   try {
+    //     const response = await api.get('/heroes')
+    //     this.heroes = response.data.heroes
+    //   } catch (error) {
+    //     this.error = error
+    //   }
+    // },
+    //
+    // async fetchTitans () {
+    //   try {
+    //     const response = await api.get('/titans')
+    //     this.titans = response.data.titans
+    //   } catch (error) {
+    //     this.error = error
+    //   }
+    // },
+    //
+    // async fetchMonsters () {
+    //   try {
+    //     const response = await api.get('/monsters')
+    //     this.monsters = response.data.monsters
+    //   } catch (error) {
+    //     this.error = error
+    //   }
+    // },
+
     // appelle aux fichier JSON
     async fetchGodsJSON () {
       this.error = null
@@ -134,6 +173,12 @@ export const useAppStore = defineStore('app', {
       }
     },
     async init () {
+      // appelle depuis l'api
+      // await this.fetchGods()
+      // await this.fetchHeroes()
+      // await this.fetchTitans()
+      // await this.fetchMonsters()
+      // appelle depuis les JSON
       await this.fetchGodsJSON()
       await this.fetchHeroesJSON()
       await this.fetchTitansJSON()
@@ -146,7 +191,6 @@ export const useAppStore = defineStore('app', {
       const index = this.favorites.findIndex(
         fav => fav.id === id && fav.type === type,
       )
-
       if (index === -1) {
         // Ajouter aux favoris
         this.favorites.push({ id, type })
@@ -154,14 +198,13 @@ export const useAppStore = defineStore('app', {
         // Retirer des favoris
         this.favorites.splice(index, 1)
       }
-
       // Sauvegarder dans localStorage
       localStorage.setItem('favorites', JSON.stringify(this.favorites))
     },
 
-    clearAllFavorites () {
-      this.favorites = []
-      localStorage.setItem('favorites', JSON.stringify([]))
-    },
+    // clearAllFavorites () {
+    //   this.favorites = []
+    //   localStorage.setItem('favorites', JSON.stringify([]))
+    // },
   },
 })
