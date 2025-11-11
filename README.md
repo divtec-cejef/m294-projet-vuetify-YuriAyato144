@@ -40,7 +40,7 @@ _(Capture d’écran de l’application)_
 - Semaine 4 : affichage des noms des dieux, des héros, des titans et des monstres + supposition que les images ne sont plus disponibles
 - Semaine 5 : création des pages pour les divinités + limite d'affichage à 4 divinité dans le menu
 - Semaine 6 : ajout des fichier JSON + implémentation de ceux-ci dans le code + ajout des différentes pages + changement du style de la barre de recherche et de l'emplacement des boutons + ajout d'un peu de CSS + local Storage utilisé pour les favoris
-- Semaine 7 : mise en place de la vue détaillé des différentes divinités
+- Semaine 7 : mise en place de la vue détaillé des différentes divinités + ajout de commentaire
 
 ---
 
