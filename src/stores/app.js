@@ -1,50 +1,57 @@
 import { defineStore } from 'pinia'
-// import api from '@/plugins/axios.js' // appelle le fichier AXIOS pour communiquer avec l'API
+// import api from '@/plugins/axios.js' // Optionnel : pour appeler une API externe
 
 export const useAppStore = defineStore('app', {
+  // État (state)
   state: () => ({
-    isLoading: false,
-    error: null,
-    gods: [],
-    heroes: [],
-    titans: [],
-    monsters: [],
-    favorites: JSON.parse(localStorage.getItem('favorites')) || [],
+    isLoading: false, // Booléen pour indiquer le chargement des données
+    error: null, // Stocke une erreur éventuelle
+    gods: [], // Tableau des dieux
+    heroes: [], // Tableau des héros
+    titans: [], // Tableau des titans
+    monsters: [], // Tableau des monstres
+    favorites: JSON.parse(localStorage.getItem('favorites')) || [], // Favoris persistés
   }),
+
+  // Getters (propriétés calculées)
   getters: {
-    hasGods: state => state.gods.length > 0,
-    totalGods: state => state.gods.length,
-    hasHeroes: state => state.heroes.length > 0,
-    totalHeroes: state => state.heroes.length,
-    hasTitans: state => state.titans.length > 0,
-    totalTitans: state => state.titans.length,
-    hasMonsters: state => state.monsters.length > 0,
-    totalMonsters: state => state.monsters.length,
+    hasGods: state => state.gods.length > 0, // Vérifie si des dieux sont chargés
+    totalGods: state => state.gods.length, // Compte des dieux
+    hasHeroes: state => state.heroes.length > 0, // Vérifie si des héros sont chargés
+    totalHeroes: state => state.heroes.length, // Compte des héros
+    hasTitans: state => state.titans.length > 0, // Vérifie si des titans sont chargés
+    totalTitans: state => state.titans.length, // Compte des titans
+    hasMonsters: state => state.monsters.length > 0, // Vérifie si des monstres sont chargés
+    totalMonsters: state => state.monsters.length, // Compte des monstres
 
     // Récupérer tous les favoris avec leurs données complètes
     getFavorites () {
-      return this.favorites.map(fav => {
-        let item = null
-        switch (fav.type) {
-          case 'god': {
-            item = this.gods.find(g => g.id === fav.id)
-            break
+      return this.favorites
+        .map(fav => {
+          let item = null
+          // Selon le type, on récupère l'objet complet
+          switch (fav.type) {
+            case 'god': {
+              item = this.gods.find(g => g.id === fav.id)
+              break
+            }
+            case 'hero': {
+              item = this.heroes.find(h => h.id === fav.id)
+              break
+            }
+            case 'titan': {
+              item = this.titans.find(t => t.id === fav.id)
+              break
+            }
+            case 'monster': {
+              item = this.monsters.find(m => m.id === fav.id)
+              break
+            }
           }
-          case 'hero': {
-            item = this.heroes.find(h => h.id === fav.id)
-            break
-          }
-          case 'titan': {
-            item = this.titans.find(t => t.id === fav.id)
-            break
-          }
-          case 'monster': {
-            item = this.monsters.find(m => m.id === fav.id)
-            break
-          }
-        }
-        return item ? { ...item, type: fav.type } : null
-      }).filter(item => item !== null)
+          // Si trouvé, ajouter le type
+          return item ? { ...item, type: fav.type } : null
+        })
+        .filter(item => item !== null) // Supprimer les éléments non trouvés
     },
 
     // Vérifier si un élément est favori
@@ -53,45 +60,10 @@ export const useAppStore = defineStore('app', {
     },
   },
 
-  actions: {
-    // appelle des données depuis l'API
-    // async fetchGods () {
-    //   try {
-    //     const response = await api.get('/gods')
-    //     this.gods = response.data.gods
-    //   } catch (error) {
-    //     this.error = error
-    //   }
-    // },
-    //
-    // async fetchHeroes () {
-    //   try {
-    //     const response = await api.get('/heroes')
-    //     this.heroes = response.data.heroes
-    //   } catch (error) {
-    //     this.error = error
-    //   }
-    // },
-    //
-    // async fetchTitans () {
-    //   try {
-    //     const response = await api.get('/titans')
-    //     this.titans = response.data.titans
-    //   } catch (error) {
-    //     this.error = error
-    //   }
-    // },
-    //
-    // async fetchMonsters () {
-    //   try {
-    //     const response = await api.get('/monsters')
-    //     this.monsters = response.data.monsters
-    //   } catch (error) {
-    //     this.error = error
-    //   }
-    // },
+  // Actions (méthodes)
 
-    // appelle aux fichier JSON
+  actions: {
+    // Charger les données depuis JSON
     async fetchGodsJSON () {
       this.error = null
       try {
@@ -112,6 +84,7 @@ export const useAppStore = defineStore('app', {
         console.log('Erreur fetchGodsJSON :', error)
       }
     },
+
     async fetchHeroesJSON () {
       this.error = null
       try {
@@ -132,6 +105,7 @@ export const useAppStore = defineStore('app', {
         console.log('Erreur fetchHeroesJSON :', error)
       }
     },
+
     async fetchTitansJSON () {
       this.error = null
       try {
@@ -152,6 +126,7 @@ export const useAppStore = defineStore('app', {
         console.log('Erreur fetchTitansJSON :', error)
       }
     },
+
     async fetchMonstersJSON () {
       this.error = null
       try {
@@ -172,21 +147,24 @@ export const useAppStore = defineStore('app', {
         console.log('Erreur fetchMonstersJSON :', error)
       }
     },
+
+    // Initialiser toutes les ressources
     async init () {
-      // appelle depuis l'api
+      // Pour appeler depuis l'API (commenté pour l'instant)
       // await this.fetchGods()
       // await this.fetchHeroes()
       // await this.fetchTitans()
       // await this.fetchMonsters()
-      // appelle depuis les JSON
+
+      // Appel des fichiers JSON
       await this.fetchGodsJSON()
       await this.fetchHeroesJSON()
       await this.fetchTitansJSON()
       await this.fetchMonstersJSON()
-      console.log('Ressources intialisées')
+      console.log('Ressources initialisées')
     },
 
-    // Actions pour les favoris
+    // Gérer les favoris
     toggleFavorite (id, type) {
       const index = this.favorites.findIndex(
         fav => fav.id === id && fav.type === type,
@@ -202,7 +180,8 @@ export const useAppStore = defineStore('app', {
       localStorage.setItem('favorites', JSON.stringify(this.favorites))
     },
 
-    // clearAllFavorites () {
+    // Optionnel : vider tous les favoris
+    // clearAllFavorites() {
     //   this.favorites = []
     //   localStorage.setItem('favorites', JSON.stringify([]))
     // },

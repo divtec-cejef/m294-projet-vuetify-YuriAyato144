@@ -234,10 +234,10 @@
     await store.fetchMonstersJSON()
   })
 
-  /* ============================
+  /*
    Computed properties
    Limite l'affichage à 4 éléments par catégorie pour l'aperçu
-   ============================ */
+  */
   const filteredGods = computed(() => store.gods.slice(0, 4))
   const filteredHeroes = computed(() => store.heroes.slice(0, 4))
   const filteredTitans = computed(() => store.titans.slice(0, 4))
@@ -245,9 +245,9 @@
 </script>
 
 <style scoped>
-/* ============================
+/*
    Styles pour le header et les boutons
-   ============================ */
+*/
 header {
   margin-bottom: 40px;
 }
