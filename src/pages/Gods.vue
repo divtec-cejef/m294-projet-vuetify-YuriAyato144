@@ -48,17 +48,76 @@
     </div>
 
     <!-- Modale pour afficher les détails -->
-    <v-dialog v-model="dialogOpen" max-width="600">
+    <v-dialog v-model="dialogOpen" max-width="800">
       <v-card v-if="selectedGod">
-        <v-card-title>{{ selectedGod.name }}</v-card-title>
-        <v-img height="300" :src="selectedGod.image" />
+        <v-card-title class="text-h4">{{ selectedGod.name }}</v-card-title>
+        <v-img cover height="300" :src="selectedGod.image" />
+
         <v-card-text>
-          <p>{{ selectedGod.description }}</p>
-          <p v-if="selectedGod.powers"><strong>Pouvoirs :</strong> {{ selectedGod.powers }}</p>
-          <p v-if="selectedGod.origin"><strong>Origine :</strong> {{ selectedGod.origin }}</p>
+          <!-- Description -->
+          <p class="text-body-1 mb-4">{{ selectedGod.description }}</p>
+
+          <!-- Origine -->
+          <div v-if="selectedGod.attributes?.origin" class="mb-3">
+            <strong>Origine :</strong> {{ selectedGod.attributes.origin }}
+          </div>
+
+          <!-- Demeure -->
+          <div v-if="selectedGod.attributes?.abode" class="mb-3">
+            <strong>Demeure :</strong> {{ selectedGod.attributes.abode }}
+          </div>
+
+          <!-- Symboles -->
+          <div v-if="selectedGod.attributes?.symbols?.length > 0" class="mb-3">
+            <strong>Symboles :</strong>
+            <v-chip
+              v-for="(symbol, index) in selectedGod.attributes.symbols"
+              :key="index"
+              class="ma-1"
+              size="small"
+            >
+              {{ symbol }}
+            </v-chip>
+          </div>
+
+          <!-- Pouvoirs -->
+          <div v-if="selectedGod.attributes?.powers?.length > 0" class="mb-3">
+            <strong>Pouvoirs :</strong>
+            <ul>
+              <li v-for="(power, index) in selectedGod.attributes.powers" :key="index">
+                {{ power }}
+              </li>
+            </ul>
+          </div>
+
+          <!-- Famille -->
+          <div v-if="selectedGod.attributes?.family" class="mb-3">
+            <strong>Famille :</strong>
+            <div v-if="selectedGod.attributes.family.parents?.length > 0" class="ml-4">
+              Parents : {{ selectedGod.attributes.family.parents.join(', ') }}
+            </div>
+            <div v-if="selectedGod.attributes.family.siblings?.length > 0" class="ml-4">
+              Frères et sœurs : {{ selectedGod.attributes.family.siblings.join(', ') }}
+            </div>
+            <div v-if="selectedGod.attributes.family.spouse?.length > 0" class="ml-4">
+              Époux/Épouse : {{ selectedGod.attributes.family.spouse.join(', ') }}
+            </div>
+          </div>
+
+          <!-- Histoires -->
+          <div v-if="selectedGod.attributes?.stories?.length > 0" class="mb-3">
+            <strong>Histoires célèbres :</strong>
+            <ul>
+              <li v-for="(story, index) in selectedGod.attributes.stories" :key="index">
+                {{ story }}
+              </li>
+            </ul>
+          </div>
         </v-card-text>
+
         <v-card-actions>
-          <v-btn color="primary" text @click="dialogOpen = false">Fermer</v-btn>
+          <v-spacer />
+          <v-btn color="primary" @click="dialogOpen = false">Fermer</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -95,7 +154,7 @@
   )
 </script>
 
-<style>
+<style scoped>
 header {
   margin-top: 40px;
   margin-bottom: 40px;
@@ -103,5 +162,18 @@ header {
 
 .bouton-menu, .bouton-descendance, .bouton-favori {
   margin-right: 10px;
+}
+
+.text-body-1 {
+  line-height: 1.6;
+}
+
+ul {
+  padding-left: 20px;
+  margin-top: 8px;
+}
+
+li {
+  margin-bottom: 4px;
 }
 </style>

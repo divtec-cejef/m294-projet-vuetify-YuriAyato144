@@ -17,7 +17,7 @@
       v-model="nom"
       class="recherche"
       label="Recherche"
-      placeholder="Chercher une divinité..."
+      placeholder="Chercher un héros..."
       type="text"
     />
 
@@ -26,16 +26,16 @@
     <!-- Liste des Héros -->
     <div v-if="filteredHeroes.length > 0">
       <v-row class="mb-6">
-        <v-col v-for="heroe in filteredHeroes" :key="heroe.id" md="3">
+        <v-col v-for="hero in filteredHeroes" :key="hero.id" md="3">
           <v-card>
-            <v-card-title>{{ heroe.name }}</v-card-title>
-            <v-card-text>{{ heroe.description }}</v-card-text>
+            <v-card-title>{{ hero.name }}</v-card-title>
+            <v-card-text>{{ hero.description }}</v-card-text>
             <v-card-actions class="justify-end">
-              <v-btn color="primary" @click="openDialog(heroe)">Voir les détails</v-btn>
+              <v-btn color="primary" @click="openDialog(hero)">Voir les détails</v-btn>
               <v-btn
-                :color="store.isFavorite(heroe.id, 'heroe') ? 'white' : 'grey'"
-                :icon="store.isFavorite(heroe.id, 'heroe') ? 'mdi-heart' : 'mdi-heart-outline'"
-                @click="store.toggleFavorite(heroe.id, 'heroe')"
+                :color="store.isFavorite(hero.id, 'hero') ? 'white' : 'grey'"
+                :icon="store.isFavorite(hero.id, 'hero') ? 'mdi-heart' : 'mdi-heart-outline'"
+                @click="store.toggleFavorite(hero.id, 'hero')"
               />
             </v-card-actions>
           </v-card>
@@ -44,21 +44,80 @@
     </div>
 
     <div v-else class="text-center py-6">
-      Aucun héro trouvé...
+      Aucun héros trouvé...
     </div>
 
     <!-- Modale pour afficher les détails -->
-    <v-dialog v-model="dialogOpen" max-width="600">
-      <v-card v-if="selectedHeroe">
-        <v-card-title>{{ selectedHeroe.name }}</v-card-title>
-        <v-img height="300" :src="selectedHeroe.image" />
+    <v-dialog v-model="dialogOpen" max-width="800">
+      <v-card v-if="selectedHero">
+        <v-card-title class="text-h4">{{ selectedHero.name }}</v-card-title>
+        <v-img cover height="300" :src="selectedHero.image" />
+
         <v-card-text>
-          <p>{{ selectedHeroe.description }}</p>
-          <p v-if="selectedHeroe.powers"><strong>Pouvoirs :</strong> {{ selectedHeroe.powers }}</p>
-          <p v-if="selectedHeroe.origin"><strong>Origine :</strong> {{ selectedHeroe.origin }}</p>
+          <!-- Description -->
+          <p class="text-body-1 mb-4">{{ selectedHero.description }}</p>
+
+          <!-- Origine -->
+          <div v-if="selectedHero.attributes?.origin" class="mb-3">
+            <strong>Origine :</strong> {{ selectedHero.attributes.origin }}
+          </div>
+
+          <!-- Demeure -->
+          <div v-if="selectedHero.attributes?.abode" class="mb-3">
+            <strong>Demeure :</strong> {{ selectedHero.attributes.abode }}
+          </div>
+
+          <!-- Symboles -->
+          <div v-if="selectedHero.attributes?.symbols?.length > 0" class="mb-3">
+            <strong>Symboles :</strong>
+            <v-chip
+              v-for="(symbol, index) in selectedHero.attributes.symbols"
+              :key="index"
+              class="ma-1"
+              size="small"
+            >
+              {{ symbol }}
+            </v-chip>
+          </div>
+
+          <!-- Pouvoirs -->
+          <div v-if="selectedHero.attributes?.powers?.length > 0" class="mb-3">
+            <strong>Pouvoirs :</strong>
+            <ul>
+              <li v-for="(power, index) in selectedHero.attributes.powers" :key="index">
+                {{ power }}
+              </li>
+            </ul>
+          </div>
+
+          <!-- Famille -->
+          <div v-if="selectedHero.attributes?.family" class="mb-3">
+            <strong>Famille :</strong>
+            <div v-if="selectedHero.attributes.family.parents?.length > 0" class="ml-4">
+              Parents : {{ selectedHero.attributes.family.parents.join(', ') }}
+            </div>
+            <div v-if="selectedHero.attributes.family.siblings?.length > 0" class="ml-4">
+              Frères et sœurs : {{ selectedHero.attributes.family.siblings.join(', ') }}
+            </div>
+            <div v-if="selectedHero.attributes.family.spouse?.length > 0" class="ml-4">
+              Époux/Épouse : {{ selectedHero.attributes.family.spouse.join(', ') }}
+            </div>
+          </div>
+
+          <!-- Histoires -->
+          <div v-if="selectedHero.attributes?.stories?.length > 0" class="mb-3">
+            <strong>Histoires célèbres :</strong>
+            <ul>
+              <li v-for="(story, index) in selectedHero.attributes.stories" :key="index">
+                {{ story }}
+              </li>
+            </ul>
+          </div>
         </v-card-text>
+
         <v-card-actions>
-          <v-btn color="primary" text @click="dialogOpen = false">Fermer</v-btn>
+          <v-spacer />
+          <v-btn color="primary" @click="dialogOpen = false">Fermer</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -72,11 +131,11 @@
   const nom = ref('')
   const store = useAppStore()
   const dialogOpen = ref(false)
-  const selectedHeroe = ref(null)
+  const selectedHero = ref(null)
 
   // Fonction pour ouvrir la modale avec les détails
-  function openDialog (heroe) {
-    selectedHeroe.value = heroe
+  function openDialog (hero) {
+    selectedHero.value = hero
     dialogOpen.value = true
   }
 
@@ -89,13 +148,13 @@
 
   // Filtre réactif
   const filteredHeroes = computed(() =>
-    store.heroes.filter(heroe =>
-      heroe.name.toLowerCase().includes(nom.value.toLowerCase()),
+    store.heroes.filter(hero =>
+      hero.name.toLowerCase().includes(nom.value.toLowerCase()),
     ),
   )
 </script>
 
-<style>
+<style scoped>
 header {
   margin-top: 40px;
   margin-bottom: 40px;
@@ -103,5 +162,18 @@ header {
 
 .bouton-menu, .bouton-descendance, .bouton-favori {
   margin-right: 10px;
+}
+
+.text-body-1 {
+  line-height: 1.6;
+}
+
+ul {
+  padding-left: 20px;
+  margin-top: 8px;
+}
+
+li {
+  margin-bottom: 4px;
 }
 </style>

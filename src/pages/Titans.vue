@@ -48,17 +48,76 @@
     </div>
 
     <!-- Modale pour afficher les détails -->
-    <v-dialog v-model="dialogOpen" max-width="600">
+    <v-dialog v-model="dialogOpen" max-width="800">
       <v-card v-if="selectedTitan">
-        <v-card-title>{{ selectedTitan.name }}</v-card-title>
-        <v-img height="300" :src="selectedTitan.image" />
+        <v-card-title class="text-h4">{{ selectedTitan.name }}</v-card-title>
+        <v-img cover height="300" :src="selectedTitan.image" />
+
         <v-card-text>
-          <p>{{ selectedTitan.description }}</p>
-          <p v-if="selectedTitan.powers"><strong>Pouvoirs :</strong> {{ selectedTitan.powers }}</p>
-          <p v-if="selectedTitan.origin"><strong>Origine :</strong> {{ selectedTitan.origin }}</p>
+          <!-- Description -->
+          <p class="text-body-1 mb-4">{{ selectedTitan.description }}</p>
+
+          <!-- Origine -->
+          <div v-if="selectedTitan.attributes?.origin" class="mb-3">
+            <strong>Origine :</strong> {{ selectedTitan.attributes.origin }}
+          </div>
+
+          <!-- Demeure -->
+          <div v-if="selectedTitan.attributes?.abode" class="mb-3">
+            <strong>Demeure :</strong> {{ selectedTitan.attributes.abode }}
+          </div>
+
+          <!-- Symboles -->
+          <div v-if="selectedTitan.attributes?.symbols?.length > 0" class="mb-3">
+            <strong>Symboles :</strong>
+            <v-chip
+              v-for="(symbol, index) in selectedTitan.attributes.symbols"
+              :key="index"
+              class="ma-1"
+              size="small"
+            >
+              {{ symbol }}
+            </v-chip>
+          </div>
+
+          <!-- Pouvoirs -->
+          <div v-if="selectedTitan.attributes?.powers?.length > 0" class="mb-3">
+            <strong>Pouvoirs :</strong>
+            <ul>
+              <li v-for="(power, index) in selectedTitan.attributes.powers" :key="index">
+                {{ power }}
+              </li>
+            </ul>
+          </div>
+
+          <!-- Famille -->
+          <div v-if="selectedTitan.attributes?.family" class="mb-3">
+            <strong>Famille :</strong>
+            <div v-if="selectedTitan.attributes.family.parents?.length > 0" class="ml-4">
+              Parents : {{ selectedTitan.attributes.family.parents.join(', ') }}
+            </div>
+            <div v-if="selectedTitan.attributes.family.siblings?.length > 0" class="ml-4">
+              Frères et sœurs : {{ selectedTitan.attributes.family.siblings.join(', ') }}
+            </div>
+            <div v-if="selectedTitan.attributes.family.spouse?.length > 0" class="ml-4">
+              Époux/Épouse : {{ selectedTitan.attributes.family.spouse.join(', ') }}
+            </div>
+          </div>
+
+          <!-- Histoires -->
+          <div v-if="selectedTitan.attributes?.stories?.length > 0" class="mb-3">
+            <strong>Histoires célèbres :</strong>
+            <ul>
+              <li v-for="(story, index) in selectedTitan.attributes.stories" :key="index">
+                {{ story }}
+              </li>
+            </ul>
+          </div>
         </v-card-text>
+
         <v-card-actions>
-          <v-btn color="primary" text @click="dialogOpen = false">Fermer</v-btn>
+          <v-spacer />
+          <v-btn color="primary" @click="dialogOpen = false">Fermer</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -95,7 +154,7 @@
   )
 </script>
 
-<style>
+<style scoped>
 header {
   margin-top: 40px;
   margin-bottom: 40px;
@@ -103,5 +162,18 @@ header {
 
 .bouton-menu, .bouton-descendance, .bouton-favori {
   margin-right: 10px;
+}
+
+.text-body-1 {
+  line-height: 1.6;
+}
+
+ul {
+  padding-left: 20px;
+  margin-top: 8px;
+}
+
+li {
+  margin-bottom: 4px;
 }
 </style>

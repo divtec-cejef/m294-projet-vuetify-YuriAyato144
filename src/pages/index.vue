@@ -97,17 +97,76 @@
     </div>
 
     <!-- Modale universelle -->
-    <v-dialog v-model="dialogOpen" max-width="600">
+    <v-dialog v-model="dialogOpen" max-width="800">
       <v-card v-if="selectedEntity">
-        <v-card-title>{{ selectedEntity.name }}</v-card-title>
-        <v-img height="300" :src="selectedEntity.image" />
+        <v-card-title class="text-h4">{{ selectedEntity.name }}</v-card-title>
+        <v-img cover height="300" :src="selectedEntity.image" />
+
         <v-card-text>
-          <p>{{ selectedEntity.description }}</p>
-          <p v-if="selectedEntity.powers"><strong>Pouvoirs :</strong> {{ selectedEntity.powers }}</p>
-          <p v-if="selectedEntity.origin"><strong>Origine :</strong> {{ selectedEntity.origin }}</p>
+          <!-- Description -->
+          <p class="text-body-1 mb-4">{{ selectedEntity.description }}</p>
+
+          <!-- Origine -->
+          <div v-if="selectedEntity.attributes?.origin" class="mb-3">
+            <strong>Origine :</strong> {{ selectedEntity.attributes.origin }}
+          </div>
+
+          <!-- Demeure -->
+          <div v-if="selectedEntity.attributes?.abode" class="mb-3">
+            <strong>Demeure :</strong> {{ selectedEntity.attributes.abode }}
+          </div>
+
+          <!-- Symboles -->
+          <div v-if="selectedEntity.attributes?.symbols?.length > 0" class="mb-3">
+            <strong>Symboles :</strong>
+            <v-chip
+              v-for="(symbol, index) in selectedEntity.attributes.symbols"
+              :key="index"
+              class="ma-1"
+              size="small"
+            >
+              {{ symbol }}
+            </v-chip>
+          </div>
+
+          <!-- Pouvoirs -->
+          <div v-if="selectedEntity.attributes?.powers?.length > 0" class="mb-3">
+            <strong>Pouvoirs :</strong>
+            <ul>
+              <li v-for="(power, index) in selectedEntity.attributes.powers" :key="index">
+                {{ power }}
+              </li>
+            </ul>
+          </div>
+
+          <!-- Famille -->
+          <div v-if="selectedEntity.attributes?.family" class="mb-3">
+            <strong>Famille :</strong>
+            <div v-if="selectedEntity.attributes.family.parents?.length > 0" class="ml-4">
+              Parents : {{ selectedEntity.attributes.family.parents.join(', ') }}
+            </div>
+            <div v-if="selectedEntity.attributes.family.siblings?.length > 0" class="ml-4">
+              Frères et sœurs : {{ selectedEntity.attributes.family.siblings.join(', ') }}
+            </div>
+            <div v-if="selectedEntity.attributes.family.spouse?.length > 0" class="ml-4">
+              Époux/Épouse : {{ selectedEntity.attributes.family.spouse.join(', ') }}
+            </div>
+          </div>
+
+          <!-- Histoires -->
+          <div v-if="selectedEntity.attributes?.stories?.length > 0" class="mb-3">
+            <strong>Histoires célèbres :</strong>
+            <ul>
+              <li v-for="(story, index) in selectedEntity.attributes.stories" :key="index">
+                {{ story }}
+              </li>
+            </ul>
+          </div>
         </v-card-text>
+
         <v-card-actions>
-          <v-btn color="primary" text @click="dialogOpen = false">Fermer</v-btn>
+          <v-spacer />
+          <v-btn color="primary" @click="dialogOpen = false">Fermer</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -140,19 +199,35 @@
   const filteredMonsters = computed(() => store.monsters.slice(0, 4))
 </script>
 
-<style>
+<style scoped>
 header {
   margin-bottom: 40px;
 }
+
 .bouton-menu, .bouton-descendance, .bouton-favori {
   margin-right: 10px;
   margin-top: 20px;
 }
-h1{
+
+h1 {
   margin-bottom: 20px;
 }
-.bouton-divinite{
+
+.bouton-divinite {
   margin-top: -20px;
   margin-bottom: 50px;
+}
+
+.text-body-1 {
+  line-height: 1.6;
+}
+
+ul {
+  padding-left: 20px;
+  margin-top: 8px;
+}
+
+li {
+  margin-bottom: 4px;
 }
 </style>
