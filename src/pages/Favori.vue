@@ -207,7 +207,7 @@
     favoriteItems.value.filter(item => item.type === 'monster'),
   )
 
-  // Fonction pour tout effacer
+  // Fonction pour tout effacer dynamiquement
   function clearAllFavorites () {
     if (confirm('Voulez-vous vraiment effacer tous vos favoris ?')) {
       store.favorites = []
