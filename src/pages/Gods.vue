@@ -1,5 +1,4 @@
 <template>
-  <!-- Barre de recherche dynamique -->
   <v-container>
     <div class="text-center" />
     <header>
@@ -13,6 +12,7 @@
         Favori
       </v-btn>
     </header>
+
     <v-text-field
       v-model="nom"
       class="recherche"
@@ -22,19 +22,16 @@
     />
 
     <h1 class="text-h3 mb-6">Dieux :</h1>
-    <!-- Dieux -->
+
+    <!-- Liste des Dieux -->
     <div v-if="filteredGods.length > 0">
       <v-row class="mb-6">
-        <v-col
-          v-for="god in filteredGods"
-          :key="god.id"
-          class="god-card mb-2"
-          md="3"
-        >
+        <v-col v-for="god in filteredGods" :key="god.id" md="3">
           <v-card>
             <v-card-title>{{ god.name }}</v-card-title>
-            <v-card-text> {{ god.description }}</v-card-text>
+            <v-card-text>{{ god.description }}</v-card-text>
             <v-card-actions class="justify-end">
+              <v-btn color="primary" @click="openDialog(god)">Voir les détails</v-btn>
               <v-btn
                 :color="store.isFavorite(god.id, 'god') ? 'white' : 'grey'"
                 :icon="store.isFavorite(god.id, 'god') ? 'mdi-heart' : 'mdi-heart-outline'"
@@ -49,6 +46,22 @@
     <div v-else class="text-center py-6">
       Aucun dieu trouvé...
     </div>
+
+    <!-- Modale pour afficher les détails -->
+    <v-dialog v-model="dialogOpen" max-width="600">
+      <v-card v-if="selectedGod">
+        <v-card-title>{{ selectedGod.name }}</v-card-title>
+        <v-img height="300" :src="selectedGod.image" />
+        <v-card-text>
+          <p>{{ selectedGod.description }}</p>
+          <p v-if="selectedGod.powers"><strong>Pouvoirs :</strong> {{ selectedGod.powers }}</p>
+          <p v-if="selectedGod.origin"><strong>Origine :</strong> {{ selectedGod.origin }}</p>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn color="primary" text @click="dialogOpen = false">Fermer</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
@@ -58,6 +71,14 @@
 
   const nom = ref('')
   const store = useAppStore()
+  const dialogOpen = ref(false)
+  const selectedGod = ref(null)
+
+  // Fonction pour ouvrir la modale avec les détails
+  function openDialog (god) {
+    selectedGod.value = god
+    dialogOpen.value = true
+  }
 
   // Charger les dieux si ce n'est pas déjà fait
   onMounted(async () => {
@@ -78,9 +99,9 @@
 header {
   margin-top: 40px;
   margin-bottom: 40px;
+}
 
-  .bouton-menu, .bouton-descendance {
-    margin-right: 10px;
-  }
+.bouton-menu, .bouton-descendance, .bouton-favori {
+  margin-right: 10px;
 }
 </style>

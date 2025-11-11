@@ -15,7 +15,6 @@
         <v-col v-for="god in filteredGods" :key="god.id" md="3">
           <v-card>
             <v-card-title>{{ god.name }}</v-card-title>
-            <v-img height="200" :src="god.image" />
             <v-card-text>{{ god.description }}</v-card-text>
             <v-card-actions class="justify-end">
               <v-btn color="primary" @click="openDialog(god)">Voir les détails</v-btn>
@@ -28,6 +27,7 @@
           </v-card>
         </v-col>
       </v-row>
+      <v-btn class="bouton-divinite" color="primary" to="/gods"> Voir plus... </v-btn>
     </div>
 
     <!-- Héros -->
@@ -49,6 +49,7 @@
           </v-card>
         </v-col>
       </v-row>
+      <v-btn class="bouton-divinite" color="primary" to="/heroes"> Voir plus... </v-btn>
     </div>
 
     <!-- Titans -->
@@ -70,6 +71,7 @@
           </v-card>
         </v-col>
       </v-row>
+      <v-btn class="bouton-divinite" color="primary" to="/titans"> Voir plus... </v-btn>
     </div>
 
     <!-- Monstres -->
@@ -91,6 +93,7 @@
           </v-card>
         </v-col>
       </v-row>
+      <v-btn class="bouton-divinite" color="primary" to="/monsters"> Voir plus... </v-btn>
     </div>
 
     <!-- Modale universelle -->
@@ -136,3 +139,20 @@
   const filteredTitans = computed(() => store.titans.slice(0, 4))
   const filteredMonsters = computed(() => store.monsters.slice(0, 4))
 </script>
+
+<style>
+header {
+  margin-bottom: 40px;
+}
+.bouton-menu, .bouton-descendance, .bouton-favori {
+  margin-right: 10px;
+  margin-top: 20px;
+}
+h1{
+  margin-bottom: 20px;
+}
+.bouton-divinite{
+  margin-top: -20px;
+  margin-bottom: 50px;
+}
+</style>
