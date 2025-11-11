@@ -7,7 +7,7 @@ READ ME
 ### Concept
 - API choisie et pourquoi : 
 	- Nom de l'API : Greek Myth API
-	- Pourquoi cette API : j'aime les anciennes religions polythéisme
+	- Pourquoi cette API : j'aime les anciennes religions polythéistes
 - Public cible : les personnes qui aime cette religion ou qui veulent en savoir plus 
 - Objectifs de l’application : afficher les différents dieux, héros (demi-dieux), titans, monstres et donner une description si possible 
 
@@ -69,8 +69,12 @@ _(Capture d’écran de l’application)_
 
 ### Choix techniques
 - API sélectionnée : Greek Myth API (https://thegreekmythapi.vercel.app/)
-- Justification du choix : la mytholigie m'interesse 
-- Endpoints utilisés : 
+- Justification du choix : la mythologie m'intéresse
+- Endpoints utilisés :
+	- https://thegreekmythapi.vercel.app/api/gods
+ 	- https://thegreekmythapi.vercel.app/api/heroes
+   	- https://thegreekmythapi.vercel.app/api/titans
+   	- https://thegreekmythapi.vercel.app/api/monsters 
 - Limites/quotas connus : ~400 requêtes possible 
 
 ### Architecture (Descriptif + schéma simple + data-flow)
