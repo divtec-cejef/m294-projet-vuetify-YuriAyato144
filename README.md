@@ -20,8 +20,7 @@ READ ME
 
 ### Aperçu visuel
 _(Capture d’écran de l’application)_  
-`<img width="1872" height="866" alt="image" src="https://github.com/user-attachments/assets/738d4013-cb37-490b-a16d-a4752a4e51fd" />
-`
+`![Screenshot de l’application](img/screenshot.png)`
 
 ---
 
