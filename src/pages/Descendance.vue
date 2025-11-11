@@ -186,25 +186,25 @@
   import { computed, onMounted, ref } from 'vue'
   import { useAppStore } from '@/stores/app.js'
 
-  /* ============================
-   Variables réactives
-   ============================ */
+  /*
+     Variables réactives
+  */
   const nom = ref('') // Texte de recherche
   const store = useAppStore() // Accès au store Pinia pour les données et favoris
   const dialogOpen = ref(false) // Etat de la modale
   const selectedEntity = ref(null) // Entité actuellement sélectionnée
 
-  /* ============================
+  /*
    Fonction pour ouvrir la modale
-   ============================ */
+  */
   function openDialog (entity) {
     selectedEntity.value = entity
     dialogOpen.value = true
   }
 
-  /* ============================
+  /*
    Chargement des données au montage
-   ============================ */
+  */
   onMounted(async () => {
     await store.fetchGodsJSON()
     await store.fetchHeroesJSON()
@@ -212,9 +212,9 @@
     await store.fetchMonstersJSON()
   })
 
-  /* ============================
+  /*
    Filtrage dynamique selon la recherche
-   ============================ */
+  */
   const filteredGods = computed(() =>
     store.gods.filter(god => god.name.toLowerCase().includes(nom.value.toLowerCase())),
   )
