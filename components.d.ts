@@ -13,7 +13,10 @@ declare module 'vue' {
     GodDetails: typeof import('./src/components/GodDetails.vue')['default']
     GodsCard: typeof import('./src/components/GodsCard.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
+    HeroDetails: typeof import('./src/components/HeroDetails.vue')['default']
+    MonsterDetails: typeof import('./src/components/MonsterDetails.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    TitanDetails: typeof import('./src/components/TitanDetails.vue')['default']
   }
 }

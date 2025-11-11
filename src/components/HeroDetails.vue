@@ -5,12 +5,12 @@
     </template>
 
     <v-card>
-      <v-card-title>{{ god.name }}</v-card-title>
-      <v-img alt="Image de dieu" height="300" :src="god.image" />
+      <v-card-title>{{ hero.name }}</v-card-title>
+      <v-img alt="Image de héros" height="300" :src="hero.image" />
       <v-card-text>
-        <p>{{ god.description }}</p>
-        <p><strong>Pouvoirs :</strong> {{ god.powers }}</p>
-        <p><strong>Origine :</strong> {{ god.origin }}</p>
+        <p>{{ hero.description }}</p>
+        <p v-if="hero.powers"><strong>Pouvoirs :</strong> {{ hero.powers }}</p>
+        <p v-if="hero.origin"><strong>Origine :</strong> {{ hero.origin }}</p>
       </v-card-text>
       <v-card-actions>
         <v-btn color="primary" text @click="isOpen = false">Fermer</v-btn>
@@ -23,7 +23,7 @@
   import { defineProps, ref } from 'vue'
 
   const props = defineProps({
-    god: { type: Object, required: true },
+    hero: { type: Object, required: true },
   })
 
   const isOpen = ref(false)
