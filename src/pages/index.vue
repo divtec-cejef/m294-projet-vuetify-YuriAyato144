@@ -1,23 +1,30 @@
 <template>
   <v-container>
+    <!-- Header et navigation principal -->
     <header>
+      <!-- Boutons de navigation vers les pages principales -->
       <v-btn class="bouton-menu" color="black" to="/">Menu</v-btn>
       <v-btn class="bouton-descendance" color="primary" to="/Descendance">Descendance</v-btn>
       <v-btn class="bouton-favori" color="primary" to="/Favori">Favori</v-btn>
     </header>
 
+    <!-- Titre principal de la page -->
     <h1 class="text-h3 mb-6">Menu</h1>
 
-    <!-- Dieux -->
+    <!-- Section pour les Dieux -->
+    <!-- Affichage des 4 premiers dieux avec possibilité de voir les détails et de les ajouter aux favoris -->
     <div v-if="filteredGods.length > 0">
       <h2 class="mt-4">Dieux :</h2>
+      <!-- Grille de cartes -->
       <v-row class="mb-6">
         <v-col v-for="god in filteredGods" :key="god.id" md="3">
           <v-card>
             <v-card-title>{{ god.name }}</v-card-title>
             <v-card-text>{{ god.description }}</v-card-text>
             <v-card-actions class="justify-end">
+              <!-- Ouvre la modale avec les détails du dieu -->
               <v-btn color="primary" @click="openDialog(god)">Voir les détails</v-btn>
+              <!-- Bouton favoris : change de couleur si ajouté -->
               <v-btn
                 :color="store.isFavorite(god.id, 'god') ? 'white' : 'grey'"
                 :icon="store.isFavorite(god.id, 'god') ? 'mdi-heart' : 'mdi-heart-outline'"
@@ -27,18 +34,22 @@
           </v-card>
         </v-col>
       </v-row>
+      <!-- Lien vers la page complète des dieux -->
       <v-btn class="bouton-divinite" color="primary" to="/gods"> Voir plus... </v-btn>
     </div>
 
-    <!-- Héros -->
+    <!-- Section pour les Héros -->
+    <!-- Affichage des 4 premiers héros avec possibilité de voir les détails et de les ajouter aux favoris -->
     <div v-if="filteredHeroes.length > 0">
       <h2 class="mt-4">Héros :</h2>
+      <!-- Grille de cartes -->
       <v-row class="mb-6">
         <v-col v-for="hero in filteredHeroes" :key="hero.id" md="3">
           <v-card>
             <v-card-title>{{ hero.name }}</v-card-title>
             <v-card-text>{{ hero.description }}</v-card-text>
             <v-card-actions class="justify-end">
+              <!-- Ouvre la modale avec les détails du héro -->
               <v-btn color="primary" @click="openDialog(hero)">Voir les détails</v-btn>
               <v-btn
                 :color="store.isFavorite(hero.id, 'hero') ? 'white' : 'grey'"
@@ -49,18 +60,22 @@
           </v-card>
         </v-col>
       </v-row>
+      <!-- Lien vers la page complète des dieux -->
       <v-btn class="bouton-divinite" color="primary" to="/heroes"> Voir plus... </v-btn>
     </div>
 
-    <!-- Titans -->
+    <!-- Section pour les Titans -->
+    <!-- Affichage des 4 premiers titans avec possibilité de voir les détails et de les ajouter aux favoris -->
     <div v-if="filteredTitans.length > 0">
       <h2 class="mt-4">Titans :</h2>
+      <!-- Grille de cartes -->
       <v-row class="mb-6">
         <v-col v-for="titan in filteredTitans" :key="titan.id" md="3">
           <v-card>
             <v-card-title>{{ titan.name }}</v-card-title>
             <v-card-text>{{ titan.description }}</v-card-text>
             <v-card-actions class="justify-end">
+              <!-- Ouvre la modale avec les détails du titan -->
               <v-btn color="primary" @click="openDialog(titan)">Voir les détails</v-btn>
               <v-btn
                 :color="store.isFavorite(titan.id, 'titan') ? 'white' : 'grey'"
@@ -74,15 +89,18 @@
       <v-btn class="bouton-divinite" color="primary" to="/titans"> Voir plus... </v-btn>
     </div>
 
-    <!-- Monstres -->
+    <!-- Section pour les Monstres -->
+    <!-- Affichage des 4 premiers monstres avec possibilité de voir les détails et de les ajouter aux favoris -->
     <div v-if="filteredMonsters.length > 0">
       <h2 class="mt-4">Monstres :</h2>
+      <!-- Grille de cartes -->
       <v-row class="mb-6">
         <v-col v-for="monster in filteredMonsters" :key="monster.id" md="3">
           <v-card>
             <v-card-title>{{ monster.name }}</v-card-title>
             <v-card-text>{{ monster.description }}</v-card-text>
             <v-card-actions class="justify-end">
+              <!-- Ouvre la modale avec les détails du monstre -->
               <v-btn color="primary" @click="openDialog(monster)">Voir les détails</v-btn>
               <v-btn
                 :color="store.isFavorite(monster.id, 'monster') ? 'white' : 'grey'"
@@ -96,27 +114,28 @@
       <v-btn class="bouton-divinite" color="primary" to="/monsters"> Voir plus... </v-btn>
     </div>
 
-    <!-- Modale universelle -->
+    <!-- Section pour les Dieux -->
+    <!-- Affichage des 4 premiers dieux avec possibilité de voir les détails et de les ajouter aux favoris -->
     <v-dialog v-model="dialogOpen" max-width="800">
       <v-card v-if="selectedEntity">
+        <!-- Titre -->
         <v-card-title class="text-h4">{{ selectedEntity.name }}</v-card-title>
+        <!-- Image principale -->
         <v-img cover height="300" :src="selectedEntity.image" />
 
         <v-card-text>
-          <!-- Description -->
+          <!-- Description générale -->
           <p class="text-body-1 mb-4">{{ selectedEntity.description }}</p>
 
-          <!-- Origine -->
+          <!-- Affichage conditionnel des attributs si présents -->
           <div v-if="selectedEntity.attributes?.origin" class="mb-3">
             <strong>Origine :</strong> {{ selectedEntity.attributes.origin }}
           </div>
 
-          <!-- Demeure -->
           <div v-if="selectedEntity.attributes?.abode" class="mb-3">
             <strong>Demeure :</strong> {{ selectedEntity.attributes.abode }}
           </div>
 
-          <!-- Symboles -->
           <div v-if="selectedEntity.attributes?.symbols?.length > 0" class="mb-3">
             <strong>Symboles :</strong>
             <v-chip
@@ -129,7 +148,6 @@
             </v-chip>
           </div>
 
-          <!-- Pouvoirs -->
           <div v-if="selectedEntity.attributes?.powers?.length > 0" class="mb-3">
             <strong>Pouvoirs :</strong>
             <ul>
@@ -139,7 +157,6 @@
             </ul>
           </div>
 
-          <!-- Famille -->
           <div v-if="selectedEntity.attributes?.family" class="mb-3">
             <strong>Famille :</strong>
             <div v-if="selectedEntity.attributes.family.parents?.length > 0" class="ml-4">
@@ -153,7 +170,6 @@
             </div>
           </div>
 
-          <!-- Histoires -->
           <div v-if="selectedEntity.attributes?.stories?.length > 0" class="mb-3">
             <strong>Histoires célèbres :</strong>
             <ul>
@@ -164,6 +180,7 @@
           </div>
         </v-card-text>
 
+        <!-- Bouton pour fermer la modale -->
         <v-card-actions>
           <v-spacer />
           <v-btn color="primary" @click="dialogOpen = false">Fermer</v-btn>
@@ -174,18 +191,42 @@
 </template>
 
 <script setup>
+
+/**
+ * Composant principal de la page Menu
+ * Affiche un aperçu des Dieux, Héros, Titans et Monstres
+ * Permet de voir les détails et de gérer les favoris
+ */
+
   import { computed, onMounted, ref } from 'vue'
   import { useAppStore } from '@/stores/app.js'
 
+  /*
+  Pinia Store
+  Stocke les données des entités et les favoris
+  */
   const store = useAppStore()
-  const dialogOpen = ref(false)
-  const selectedEntity = ref(null)
 
+  /*
+  Modale et élément sélectionné
+  */
+  const dialogOpen = ref(false) // Etat de la modale
+  const selectedEntity = ref(null) // Entité actuellement sélectionnée pour la modale
+
+  /**
+   * Ouvre la modale avec les détails d'une entité
+   * @param {Object} entity - Dieu, Héros, Titan ou Monstre
+   */
   function openDialog (entity) {
     selectedEntity.value = entity
     dialogOpen.value = true
   }
 
+  /**
+   * Lifecycle hook : au montage du composant,
+   * on charge les données JSON pour toutes les catégories.
+   * Cela initialise les listes pour l'affichage.
+   */
   onMounted(async () => {
     await store.fetchGodsJSON()
     await store.fetchHeroesJSON()
@@ -193,6 +234,10 @@
     await store.fetchMonstersJSON()
   })
 
+  /* ============================
+   Computed properties
+   Limite l'affichage à 4 éléments par catégorie pour l'aperçu
+   ============================ */
   const filteredGods = computed(() => store.gods.slice(0, 4))
   const filteredHeroes = computed(() => store.heroes.slice(0, 4))
   const filteredTitans = computed(() => store.titans.slice(0, 4))
@@ -200,6 +245,9 @@
 </script>
 
 <style scoped>
+/* ============================
+   Styles pour le header et les boutons
+   ============================ */
 header {
   margin-bottom: 40px;
 }
@@ -209,19 +257,23 @@ header {
   margin-top: 20px;
 }
 
+/* Titre principal */
 h1 {
   margin-bottom: 20px;
 }
 
+/* Boutons "Voir plus..." */
 .bouton-divinite {
   margin-top: -20px;
   margin-bottom: 50px;
 }
 
+/* Texte de description des entités */
 .text-body-1 {
   line-height: 1.6;
 }
 
+/* Listes dans la modale */
 ul {
   padding-left: 20px;
   margin-top: 8px;
